@@ -1,0 +1,52 @@
+Metadata-Version: 2.1
+Name: astro-pi-replay
+Version: 0.0.18
+Summary: A CLI to replay historic data from previous ISS missions.
+Author-email: Geraint Ballinger <geraint.ballinger@raspberrypi.org>
+Project-URL: Homepage, https://github.com/astro-pi/Astro-Pi-Replay
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENCE.txt
+Requires-Dist: colorzero >=2.0
+Requires-Dist: Pillow ==10.0.0
+Requires-Dist: requests >=2.31
+Requires-Dist: skyfield >=1.46
+Requires-Dist: typing-extensions >=4.7.1
+Requires-Dist: tqdm >=4.66.0
+Requires-Dist: exif >=1.6.0
+Requires-Dist: scipy ==1.8.1 ; python_version < "3.11"
+Requires-Dist: pandas ==2.0.3 ; python_version < "3.12"
+Requires-Dist: numpy ==1.24.3 ; python_version < "3.12"
+Requires-Dist: scipy >=1.11.2 ; python_version >= "3.11"
+Requires-Dist: pandas ==2.1.1 ; python_version >= "3.12"
+Requires-Dist: numpy ==1.26.0 ; python_version >= "3.12"
+
+![Build and test workflow](https://github.com/astro-pi/Astro-Pi-Replay/actions/workflows/build_and_test_scheduler.yml/badge.svg?branch=main)
+![Build and test workflow](https://github.com/astro-pi/Astro-Pi-Replay/actions/workflows/build_and_test_worker.yml/badge.svg?branch=main)
+
+# Astro Pi Replay
+
+A CLI to replay historic data from previous ISS missions.
+
+All function calls from the `picamera`, `picamera2`, `sense_hat`, `skyfield`, and `orbit` libraries
+will be mocked to return data from an historic run from the ISS, rather than from attached hardware.
+This allows teams to test their code with representative data and provide a confidence boost that
+their code will work
+
+## Quickstart
+
+Change to your project directory (`cd my-project`), install `Astro-Pi-Replay` using `pip`, and then run your program with `Astro-Pi-Replay run main.py`.
+
+For more detailed installation instructions, checkout the docs site.
+
+This will prepare a sequence of near-infrared images (NIR) images, together with the corresponding
+data collected from the Sense Hat, to be returned by all calls to `picamera`, `sense_hat`, etc.
+The CLI allows for some configuration of this behaviour - see the [Documentation](#documentation) for more details.
+
+## Documentation
+
+See the [docs](../docs) page.
+
+
