@@ -1,7 +1,7 @@
 # Projet de Calcul de la Vitesse de l'ISS
 - Nom de l'équipe : 
-- Professeur : 
-- Étudiants : 
+- Professeur : Laila Bouteglifine
+- Étudiants : [Thibaut Dudart](https://github.com/thibautddrt), [Rafaël Ravry](https://github.com/xansterrr), [Florian Berte](https://github.com/xen0r-star)
 - École : [Institut Saint-François de Sales](https://maps.app.goo.gl/fj6R5pSYGHteDu2t7)
 - Ville : [Ath](https://maps.app.goo.gl/BtFSd77azyfDAs5f6)
 - Pays : Belgique
