@@ -9,7 +9,7 @@ script_dir = Path(__file__).parent.resolve()
 
 model_file = script_dir/'models'/'cloud-nocloud.tflite' # name of model
 label_file = script_dir/'models'/'labels.txt' # Name of your label file
-image_file = script_dir/'..'/'Image'/'picture'/'coscodingofspace_photo_0653.jpg' # Name of image for classification
+image_file = script_dir/'..'/'Image-test'/'picture'/'coscodingofspace_photo_0653.jpg' # Name of image for classification
 
 interpreter = make_interpreter(f"{model_file}")
 interpreter.allocate_tensors()
