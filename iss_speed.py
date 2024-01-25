@@ -115,7 +115,7 @@ class pictureCamera:
 
         return self.pictureNumber
 
-
+ 
 
 pictureCamera = pictureCamera()
 
@@ -124,3 +124,4 @@ for i in range(1):
 
     speedImageInstance = speedImage()
     print(speedImageInstance.speed(f"{dir_path}/Picture/picture{pictureNumber - 1:03d}.jpg", f"{dir_path}/Picture/picture{pictureNumber:03d}.jpg"))
+    

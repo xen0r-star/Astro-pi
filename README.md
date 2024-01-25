@@ -38,3 +38,4 @@ En conclusion, cette approche offre une manière novatrice de calculer la vitess
 - resulta 
 - google coral
 - probléme environement
+- gestion d'erreur
