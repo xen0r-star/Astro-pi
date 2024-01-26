@@ -1,0 +1,185 @@
+{
+  "todotree": {
+    "tree": [
+      {
+        "key": 1706291323335,
+        "children": [
+          {
+            "key": 1706291279923,
+            "children": [],
+            "todo": {
+              "content": "Utilisez plus de deux photos",
+              "id": 1706291279923,
+              "level": "default",
+              "done": false,
+              "start": 1706291279923,
+              "focus": false,
+              "end": 1706291531415
+            }
+          },
+          {
+            "key": 1706291287735,
+            "children": [],
+            "todo": {
+              "content": "Vérifiez le temps qu'il faut à une photo pour être écrite sur le disque pour obtenir une valeur plus précise du temps entre les photos",
+              "id": 1706291287735,
+              "level": "default",
+              "done": false,
+              "start": 1706291287735
+            }
+          },
+          {
+            "key": 1706291248430,
+            "children": [],
+            "todo": {
+              "content": "Utiliser un algorithme de détection de fonctionnalités différent dans OpenCV",
+              "id": 1706291248430,
+              "level": "default",
+              "done": false,
+              "start": 1706291248430,
+              "focus": false,
+              "end": 1706305557868
+            }
+          },
+          {
+            "key": 1706291265488,
+            "children": [],
+            "todo": {
+              "content": "Choisissez un nombre différent de correspondances de fonctionnalités à utiliser",
+              "id": 1706291265488,
+              "level": "default",
+              "done": false,
+              "start": 1706291265488
+            }
+          },
+          {
+            "key": 1706291300089,
+            "children": [],
+            "todo": {
+              "content": "L'angle de mouvement (en diagonale à travers le cadre) a-t-il un impact qui doit être corrigé ?",
+              "id": 1706291300089,
+              "level": "default",
+              "done": false,
+              "start": 1706291300089
+            }
+          },
+          {
+            "key": 1706291292853,
+            "children": [],
+            "todo": {
+              "content": "La courbure de la Terre a-t-elle un effet sur les valeurs réelles de distance parcourue ?",
+              "id": 1706291292853,
+              "level": "default",
+              "done": false,
+              "start": 1706291292853
+            }
+          },
+          {
+            "key": 1706291297763,
+            "children": [],
+            "todo": {
+              "content": "La hauteur de l’élément identifié a-t-elle également un effet ?",
+              "id": 1706291297763,
+              "level": "default",
+              "done": false,
+              "start": 1706291297763
+            }
+          },
+          {
+            "key": 1706291319717,
+            "children": [],
+            "todo": {
+              "content": "Si vos fonctionnalités correspondantes sont des nuages, pouvez-vous compenser le fait qu’elles peuvent également se déplacer ?",
+              "id": 1706291319717,
+              "level": "default",
+              "done": false,
+              "start": 1706291319717
+            }
+          },
+          {
+            "key": 1706291363927,
+            "children": [],
+            "todo": {
+              "content": "Problème de variation de vitesse en fonction de la taille de l'image",
+              "id": 1706291363927,
+              "level": "default",
+              "done": false,
+              "start": 1706291363927
+            }
+          }
+        ],
+        "todo": {
+          "content": "Détection de la vitesse",
+          "id": 1706291323335,
+          "level": "warning",
+          "done": false,
+          "start": 1706291323336,
+          "focus": false,
+          "end": 1706291532544
+        }
+      },
+      {
+        "key": 1706291449451,
+        "children": [
+          {
+            "key": 1706291627369,
+            "children": [],
+            "todo": {
+              "content": "Analyse statistique des données collectées",
+              "id": 1706291627369,
+              "level": "default",
+              "done": false,
+              "start": 1706291627369
+            }
+          }
+        ],
+        "todo": {
+          "content": "Afficher le résulta",
+          "id": 1706291449451,
+          "level": "warning",
+          "done": false,
+          "start": 1706291449451
+        }
+      },
+      {
+        "key": 1706291505951,
+        "children": [],
+        "todo": {
+          "content": "Probléme avec Google coral",
+          "id": 1706291505951,
+          "level": "secondary",
+          "done": false,
+          "start": 1706291505951
+        }
+      }
+    ],
+    "expandKeys": [
+      1706291323335,
+      1706291279923,
+      1706291287735,
+      1706291248430,
+      1706291265488,
+      1706291300089,
+      1706291292853,
+      1706291297763,
+      1706291319717,
+      1706291363927,
+      1706291449451,
+      1706291505951
+    ],
+    "schema": "https://github.com/Saber2pr/vsc-ext-todolist/blob/master/src/api/type.ts#L3",
+    "add_mode": "bottom",
+    "virtual": false,
+    "timelines": [
+      1706291449451
+    ],
+    "showLine": false,
+    "playFontSize": 24,
+    "title": "TACHE",
+    "autoSort": false,
+    "showEndTime": false,
+    "simpleMode": false,
+    "lang": "en",
+    "version": "1706308735984"
+  }
+}

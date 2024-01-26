@@ -29,13 +29,3 @@ Le projet devrait fournir une méthode permettant de calculer la vitesse de l'IS
 
 ## Conclusion
 En conclusion, cette approche offre une manière novatrice de calculer la vitesse de l'ISS en utilisant des technologies abordables telles que la caméra Raspberry Pi et le processeur Google Coral. Les résultats obtenus pourraient avoir des applications significatives dans la surveillance et l'étude du mouvement de la Station Spatiale Internationale.
-
-
-
-
-## Probléme
-- probléme taille image
-- resulta 
-- google coral
-- probléme environement
-- gestion d'erreur
