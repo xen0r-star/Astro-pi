@@ -28,4 +28,4 @@ Répétition du processus plusieurs fois pour obtenir une vitesse moyenne de l'I
 Le projet devrait fournir une méthode permettant de calculer la vitesse de l'ISS en utilisant des images de la Terre capturées à partir de la station spatiale. Les résultats seront basés sur une analyse précise des images et une mesure correcte de la distance entre des éléments repérés.
 
 ## Conclusion
-En conclusion, cette approche offre une manière novatrice de calculer la vitesse de l'ISS en utilisant des technologies abordables telles que la caméra Raspberry Pi et le processeur Google Coral. Les résultats obtenus pourraient avoir des applications significatives dans la surveillance et l'étude du mouvement de la Station Spatiale Internationale.
+En conclusion, cette approche offre une manière novatrice de calculer la vitesse de l'ISS en utilisant des technologies abordables telles que la caméra Raspberry Pi et le processeur Google Coral. Les résultats obtenus pourraient avoir des applications significatives dans la surveillance et l'étude du mouvement de la Station Spatiale Internationale. 
