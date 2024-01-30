@@ -167,7 +167,7 @@ pictureCamera = pictureCamera()
 speedImage = speedImage()
 speed = 0
 
-for i in range(1):
+for i in range(5): 
     pictureNumber = pictureCamera.take(2)
 
     if pictureNumber != None:
