@@ -1,0 +1,64 @@
+[I 240205 14:09:40 main:281] Taking the picture 001
+[I 240205 14:09:56 main:281] Taking the picture 002
+[I 240205 14:09:56 main:197] The calculation was made, speed: 11.5177
+[E 240205 14:09:56 main:325] an error occurs when saving data: cannot access local variable 'file' where it is not associated with a value
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 311, in speedData
+        with open(file, 'w') as file:
+                  ^^^^
+    UnboundLocalError: cannot access local variable 'file' where it is not associated with a value
+[I 240205 14:10:13 main:281] Taking the picture 003
+[I 240205 14:10:29 main:281] Taking the picture 004
+[I 240205 14:10:29 main:197] The calculation was made, speed: 7.0013
+[E 240205 14:10:29 main:325] an error occurs when saving data: cannot access local variable 'file' where it is not associated with a value
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 311, in speedData
+        with open(file, 'w') as file:
+                  ^^^^
+    UnboundLocalError: cannot access local variable 'file' where it is not associated with a value
+[I 240205 14:10:46 main:281] Taking the picture 005
+[I 240205 14:11:02 main:281] Taking the picture 006
+[I 240205 14:11:02 main:197] The calculation was made, speed: 7.0256
+[E 240205 14:11:02 main:325] an error occurs when saving data: cannot access local variable 'file' where it is not associated with a value
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 311, in speedData
+        with open(file, 'w') as file:
+                  ^^^^
+    UnboundLocalError: cannot access local variable 'file' where it is not associated with a value
+[I 240205 14:11:17 main:281] Taking the picture 007
+[I 240205 14:11:35 main:281] Taking the picture 008
+[I 240205 14:11:35 main:197] The calculation was made, speed: 7.0244
+[E 240205 14:11:35 main:325] an error occurs when saving data: cannot access local variable 'file' where it is not associated with a value
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 311, in speedData
+        with open(file, 'w') as file:
+                  ^^^^
+    UnboundLocalError: cannot access local variable 'file' where it is not associated with a value
+[I 240205 16:32:02 main:137] Taking the picture 001
+[I 240205 16:32:20 main:137] Taking the picture 002
+[I 240205 16:32:20 main:98] The calculation was made, speed: 5.4608
+[I 240205 16:32:20 main:155] Speed data saved in the file
+[I 240205 16:32:36 main:137] Taking the picture 003
+[I 240205 16:32:53 main:137] Taking the picture 004
+[I 240205 16:32:53 main:98] The calculation was made, speed: 11.1046
+[I 240205 16:32:53 main:155] Speed data saved in the file
+[I 240205 16:33:09 main:137] Taking the picture 005
+[I 240205 16:33:26 main:137] Taking the picture 006
+[I 240205 16:33:26 main:98] The calculation was made, speed: 7.5013
+[I 240205 16:33:26 main:155] Speed data saved in the file
+[I 240205 16:33:42 main:137] Taking the picture 007
+[I 240205 16:33:57 main:137] Taking the picture 008
+[I 240205 16:33:57 main:98] The calculation was made, speed: 7.7658
+[I 240205 16:33:57 main:155] Speed data saved in the file
+[I 240205 16:49:23 main:137] Taking the picture 001
+[I 240205 16:49:39 main:137] Taking the picture 002
+[I 240205 16:49:39 main:98] The calculation was made, speed: 11.5177
+[I 240205 16:49:39 main:155] Speed data saved in the file
+[I 240205 17:14:11 main:158] Taking the picture 001
+[I 240205 17:14:28 main:158] Taking the picture 002
+[I 240205 17:14:28 main:99] The calculation was made, speed: 11.5177
+[I 240205 17:14:28 main:176] Speed data saved in the file
+[I 240205 17:14:44 main:158] Taking the picture 003
+[I 240205 17:15:00 main:158] Taking the picture 004
+[I 240205 17:15:01 main:99] The calculation was made, speed: 7.0013
+[I 240205 17:15:01 main:176] Speed data saved in the file
