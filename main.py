@@ -1,13 +1,15 @@
-from exif import Image
+from exif import Image as exifImage
+from PIL import Image, ImageDraw
+import matplotlib.pyplot as plt
 from datetime import datetime
 from picamera import PiCamera
-from orbit import ISS
 from logzero import logger
 from pathlib import Path
-import logzero
-import cv2
-import math
+from orbit import ISS
 import numpy as np
+import logzero
+import math
+import cv2
 
 
 paths = Path(__file__).parent.resolve()
@@ -42,7 +44,7 @@ class speedImage:
 
                 try:
                     with open(image, 'rb') as imageFile:
-                        img = Image(imageFile)
+                        img = exifImage(imageFile)
                         timeStr = img.get("datetime_original")
                         time = datetime.strptime(timeStr, '%Y:%m:%d %H:%M:%S')
                     return time
@@ -132,28 +134,36 @@ class pictureCamera:
 
     def take(self, number):
         try:
-            def convert(angle):
+            def convertDns(angle):
                 sign, degrees, minutes, seconds = angle.signed_dms()
-                exif_angle = f'{degrees:.0f}/1,{minutes:.0f}/1,{seconds*10:.0f}/10'
-                
-                return sign < 0, exif_angle
-
-
+                return sign < 0, {'degrees': degrees, 'minutes': minutes, 'seconds': seconds}
+            
+            def convertDec(angle):
+                degrees, minutes, seconds = angle['degrees'], angle['minutes'], angle['seconds']
+                return degrees + (minutes / 60) + (seconds / 3600)
+            
+            coordinated = []
             for _ in range(number):
                 self.pictureNumber += 1
 
                 iss = ISS()
                 point = iss.coordinates()
 
-                south, exif_latitude = convert(point.latitude)
-                west, exif_longitude = convert(point.longitude)
+                lat = point.latitude
+                lon = point.longitude
+                south, exifLatitude = convertDns(lat)
+                west, exifLongitude = convertDns(lon)
 
-                self.camera.exif_tags['GPS.GPSLatitude'] = exif_latitude
+                self.camera.exif_tags['GPS.GPSLatitude'] = "{:.0f}/1,{:.0f}/1,{:.0f}/10".format(exifLatitude['degrees'], exifLatitude['minutes'], exifLatitude['seconds']*10)
                 self.camera.exif_tags['GPS.GPSLatitudeRef'] = "S" if south else "N"
-                self.camera.exif_tags['GPS.GPSLongitude'] = exif_longitude
+                self.camera.exif_tags['GPS.GPSLongitude'] = "{:.0f}/1,{:.0f}/1,{:.0f}/10".format(exifLongitude['degrees'], exifLongitude['minutes'], exifLongitude['seconds']*10)
                 self.camera.exif_tags['GPS.GPSLongitudeRef'] = "W" if west else "E"
 
                 self.camera.capture(f'{paths}/Picture/picture{self.pictureNumber:03d}.jpg')
+
+                latitude = convertDec(exifLatitude)
+                longitude = convertDec(exifLongitude)
+                coordinated.append((latitude, longitude))
 
                 logger.info(f"Taking the picture {self.pictureNumber:03d}")
 
@@ -161,8 +171,7 @@ class pictureCamera:
             logger.exception(f"An error occurred when taking the picture: {error}")
             return None
         
-        return self.pictureNumber
-    
+        return self.pictureNumber, coordinated
 
 class dataStorage:
     def __init__(self, file):
@@ -181,6 +190,34 @@ class dataStorage:
             return False
 
 
+class statistic:
+    def __init__(self, output):
+        self.output = output
+
+    def drawPointMap(self, coordinated):
+        input = paths / "Resources" / "map.png"
+        output = self.output / "stationsTracking.png"
+
+        worldMap = Image.open(input)
+
+        for ligne in coordinated:
+            for paire in ligne:
+                latitude, longitude = paire
+
+                x = ((longitude * math.pi * 6378137 / 180) + (math.pi * 6378137)) / ((2 * math.pi * 6378137 / 256) / 8)
+                y = (((math.log(math.tan((90 - latitude) * math.pi / 360)) / (math.pi / 180)) * math.pi * 6378137 / 180) + (math.pi * 6378137)) / ((2 * math.pi * 6378137 / 256) / 8)
+                
+                draw = ImageDraw.Draw(worldMap)
+                pointSize = 3
+                draw.ellipse([x - pointSize, y - pointSize, x + pointSize, y + pointSize], fill="#b52b10", outline="#760000")
+
+        worldMap.save(output)
+
+    def graphicSpeedPicture(self, data):
+        plt.plot(data)
+        plt.legend(['Speed with picture'], loc='lower right')
+        plt.savefig(self.output / 'graphic_SpeedPicture.png')
+
 
 
 if __name__ == "__main__":
@@ -188,17 +225,23 @@ if __name__ == "__main__":
         pictureCamera = pictureCamera()
         speedImage = speedImage()
         speedDataStorage = dataStorage(paths / 'result.txt')
-        speed = list(range(5))
+        statistic = statistic(paths / "Statistic")
+        
+        speed = []
+        coordinated = []
 
-        for i in range(5): 
-            pictureNumber = pictureCamera.take(2)
+        for i in range(15): 
+            pictureNumber, pictureCoordinated = pictureCamera.take(2)
+            coordinated.append(pictureCoordinated)
 
             if pictureNumber != None:
-                speed[i] = speedImage.speed(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg')
+                speed.append(speedImage.speed(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
                 speedDataStorage.speedData("{:.4f}".format(np.mean(speed)))
             
-
+        print(speed)
         speedDataStorage.speedData("{:.4f}".format(np.mean(speed)))
+        statistic.drawPointMap(coordinated)
+        statistic.graphicSpeedPicture(speed)
 
     except Exception as error:
         logger.exception(f"an error occurs when the main function: {error}")
