@@ -15,7 +15,7 @@ import cv2
 paths = Path(__file__).parent.resolve()
 logzero.logfile(paths / "logFile.log")
 
-class speedImage:
+class speed:
     def __init__(self):
         self.data = {
             "image1": {
@@ -38,10 +38,9 @@ class speedImage:
             "speed": 0,
         }
 
-    def speed(self, image1, image2, feature=1000, GSD=12648):
+    def speedImage(self, image1, image2, feature=1000, GSD=12648):
         try:
-            def get_time(image):
-
+            def getData(image):
                 try:
                     with open(image, 'rb') as imageFile:
                         img = exifImage(imageFile)
@@ -50,13 +49,13 @@ class speedImage:
                     return time
                 
                 except Exception as error:
-                    logger.exception(f"An error occurs when collecting the time from the image: {error}")
+                    logger.exception(f"An error occurs when collecting the data from the image: {error}")
                     return None
 
 
             # get time difference
-            self.data["image1"]["time"] = get_time(image1)
-            self.data["image2"]["time"] = get_time(image2)
+            self.data["image1"]["time"] = getData(image1)
+            self.data["image2"]["time"] = getData(image2)
             self.data["timeDifference"] = self.data["image2"]["time"] - self.data["image1"]["time"]
             self.data["timeDifference"] =  self.data["timeDifference"].seconds
         
@@ -105,25 +104,45 @@ class speedImage:
             logger.exception(f"An error occurs when calculating speed with images: {error}")
             return 0
 
-    def displayMatches(self):
+    def speedCoordinated(self, image1, image2):
         try:
-            match_img = cv2.drawMatches(self.data["image1"]["cv"], 
-                                        self.data["image1"]["keypoints"], 
-                                        self.data["image2"]["cv"], 
-                                        self.data["image2"]["keypoints"], 
-                                        self.data["matches"][:100], 
-                                        None)
+            def getData(image):
+                try:
+                    with open(image, 'rb') as imageFile:
+                        img = exifImage(imageFile)
+
+                        timeStr = img.get("datetime_original")
+                        time = datetime.strptime(timeStr, '%Y:%m:%d %H:%M:%S')
+
+                        lat, lon = img.get("gps_latitude"), img.get("gps_longitude")
+                        lat_ref, lon_ref = img.get("gps_latitude_ref"), img.get("gps_longitude_ref")
+
+                        lat = lat[0] + (lat[1] / 60) + (lat[2] / 3600)
+                        lon = lon[0] + (lon[1] / 60) + (lon[2] / 3600)
+
+                        lat *= -1 if lat_ref != "N" else 1
+                        lon *= -1 if lon_ref != "E" else 1
+
+                    return time, lat, lon
+                
+                except Exception as error:
+                    logger.exception(f"An error occurs when collecting the data from the image: {error}")
+                    return None
+
+            time1, lat1, lon1 = getData(image1)
+            time2, lat2, lon2 = getData(image2)
+            time = time2 - time1
             
-            resize = cv2.resize(match_img, (1600, 600), interpolation=cv2.INTER_AREA)
-            cv2.imshow('matche', resize)
-            logger.info("open display matches")
+            # formule de haversine
+            a = math.sin((math.radians(lat2) - math.radians(lat1)) / 2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin((math.radians(lon2) - math.radians(lon1)) / 2)**2
+            c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+            distance = 6371.0097714 * c
 
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
-            logger.info("close display matches")
-
+            # return speed
+        
         except Exception as error:
-            logger.exception(f"An error occurs when displaying the match: {error}")
+            logger.exception(f"An error occurs when calculating speed with images: {error}")
+            return 0
 
 
 class pictureCamera:
@@ -134,13 +153,15 @@ class pictureCamera:
 
     def take(self, number):
         try:
-            def convertDns(angle):
+            def convertDms(angle):
                 sign, degrees, minutes, seconds = angle.signed_dms()
                 return sign < 0, {'degrees': degrees, 'minutes': minutes, 'seconds': seconds}
             
-            def convertDec(angle):
+            def convertDec(angle, direction):
                 degrees, minutes, seconds = angle['degrees'], angle['minutes'], angle['seconds']
-                return degrees + (minutes / 60) + (seconds / 3600)
+                Decimal = degrees + (minutes / 60) + (seconds / 3600)
+                Decimal *= -1 if direction else 1
+                return Decimal
             
             coordinated = []
             for _ in range(number):
@@ -151,8 +172,8 @@ class pictureCamera:
 
                 lat = point.latitude
                 lon = point.longitude
-                south, exifLatitude = convertDns(lat)
-                west, exifLongitude = convertDns(lon)
+                south, exifLatitude = convertDms(lat)
+                west, exifLongitude = convertDms(lon)
 
                 self.camera.exif_tags['GPS.GPSLatitude'] = "{:.0f}/1,{:.0f}/1,{:.0f}/10".format(exifLatitude['degrees'], exifLatitude['minutes'], exifLatitude['seconds']*10)
                 self.camera.exif_tags['GPS.GPSLatitudeRef'] = "S" if south else "N"
@@ -161,8 +182,8 @@ class pictureCamera:
 
                 self.camera.capture(f'{paths}/Picture/picture{self.pictureNumber:03d}.jpg')
 
-                latitude = convertDec(exifLatitude)
-                longitude = convertDec(exifLongitude)
+                latitude = convertDec(exifLatitude, south)
+                longitude = convertDec(exifLongitude, west)
                 coordinated.append((latitude, longitude))
 
                 logger.info(f"Taking the picture {self.pictureNumber:03d}")
@@ -223,25 +244,25 @@ class statistic:
 if __name__ == "__main__":
     try:
         pictureCamera = pictureCamera()
-        speedImage = speedImage()
+        speed = speed()
         speedDataStorage = dataStorage(paths / 'result.txt')
         statistic = statistic(paths / "Statistic")
         
-        speed = []
+        speedPicture, speedCoordinated = [], []
         coordinated = []
 
         for i in range(15): 
             pictureNumber, pictureCoordinated = pictureCamera.take(2)
-            coordinated.append(pictureCoordinated)
+            # coordinated.append(pictureCoordinated)
 
             if pictureNumber != None:
-                speed.append(speedImage.speed(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
-                speedDataStorage.speedData("{:.4f}".format(np.mean(speed)))
+                # speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
+                speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg')
+                # speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
             
-        print(speed)
-        speedDataStorage.speedData("{:.4f}".format(np.mean(speed)))
-        statistic.drawPointMap(coordinated)
-        statistic.graphicSpeedPicture(speed)
+        # speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
+        # statistic.drawPointMap(coordinated)
+        # statistic.graphicSpeedPicture(speedPicture)
 
     except Exception as error:
         logger.exception(f"an error occurs when the main function: {error}")

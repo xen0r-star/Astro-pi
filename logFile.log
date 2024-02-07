@@ -59,3 +59,98 @@
 [I 240206 22:55:30 main:101] The calculation was made, speed: 7.5739
 [I 240206 22:55:30 main:185] Speed data saved in the file
 [I 240206 22:55:30 main:185] Speed data saved in the file
+[I 240207 18:43:25 main:176] Taking the picture 001
+[I 240207 18:43:41 main:176] Taking the picture 002
+[I 240207 18:43:58 main:176] Taking the picture 003
+[I 240207 18:44:14 main:176] Taking the picture 004
+[I 240207 18:44:31 main:176] Taking the picture 005
+[I 240207 18:44:47 main:176] Taking the picture 006
+[I 240207 18:45:02 main:176] Taking the picture 007
+[I 240207 18:45:20 main:176] Taking the picture 008
+[I 240207 18:45:36 main:176] Taking the picture 009
+[I 240207 18:45:52 main:176] Taking the picture 010
+[I 240207 18:46:09 main:176] Taking the picture 011
+[I 240207 18:46:25 main:176] Taking the picture 012
+[I 240207 18:46:41 main:176] Taking the picture 013
+[I 240207 18:46:57 main:176] Taking the picture 014
+[I 240207 18:47:11 main:176] Taking the picture 015
+[I 240207 18:47:26 main:176] Taking the picture 016
+[I 240207 18:47:42 main:176] Taking the picture 017
+[I 240207 18:52:49 main:181] Taking the picture 001
+[I 240207 18:53:05 main:181] Taking the picture 002
+[I 240207 18:53:22 main:181] Taking the picture 003
+[I 240207 18:53:38 main:181] Taking the picture 004
+[I 240207 18:54:37 main:181] Taking the picture 001
+[I 240207 18:54:53 main:181] Taking the picture 002
+[I 240207 18:55:10 main:181] Taking the picture 003
+[I 240207 18:55:26 main:181] Taking the picture 004
+[I 240207 18:55:43 main:181] Taking the picture 005
+[I 240207 18:55:59 main:181] Taking the picture 006
+[I 240207 18:58:17 main:183] Taking the picture 001
+[I 240207 19:11:42 main:184] Taking the picture 001
+[I 240207 19:12:32 main:184] Taking the picture 001
+[I 240207 19:18:47 main:183] Taking the picture 001
+[I 240207 19:19:03 main:183] Taking the picture 002
+[I 240207 20:08:38 main:188] Taking the picture 001
+[I 240207 20:08:54 main:188] Taking the picture 002
+[E 240207 20:08:54 main:129] An error occurs when collecting the data from the image: tuple indices must be integers or slices, not str
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 120, in getData
+        lat = lat['degrees'] + (lat['minutes'] / 60) + (lat['seconds'] / 3600)
+              ~~~^^^^^^^^^^^
+    TypeError: tuple indices must be integers or slices, not str
+[E 240207 20:08:54 main:143] An error occurs when calculating speed with images: cannot unpack non-iterable NoneType object
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 132, in speedCoordinated
+        time1, lat1, lon1 = getData(image1)
+        ^^^^^^^^^^^^^^^^^
+    TypeError: cannot unpack non-iterable NoneType object
+[I 240207 20:09:11 main:188] Taking the picture 003
+[I 240207 20:09:27 main:188] Taking the picture 004
+[E 240207 20:09:27 main:129] An error occurs when collecting the data from the image: tuple indices must be integers or slices, not str
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 120, in getData
+        lat = lat['degrees'] + (lat['minutes'] / 60) + (lat['seconds'] / 3600)
+              ~~~^^^^^^^^^^^
+    TypeError: tuple indices must be integers or slices, not str
+[E 240207 20:09:27 main:143] An error occurs when calculating speed with images: cannot unpack non-iterable NoneType object
+    Traceback (most recent call last):
+      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 132, in speedCoordinated
+        time1, lat1, lon1 = getData(image1)
+        ^^^^^^^^^^^^^^^^^
+    TypeError: cannot unpack non-iterable NoneType object
+[I 240207 20:09:44 main:188] Taking the picture 005
+[I 240207 20:10:41 main:188] Taking the picture 001
+[I 240207 20:10:57 main:188] Taking the picture 002
+[I 240207 20:11:14 main:188] Taking the picture 003
+[I 240207 20:11:30 main:188] Taking the picture 004
+[I 240207 20:15:24 main:189] Taking the picture 001
+[I 240207 20:15:40 main:189] Taking the picture 002
+[I 240207 20:15:57 main:189] Taking the picture 003
+[I 240207 20:16:13 main:189] Taking the picture 004
+[I 240207 20:16:30 main:189] Taking the picture 005
+[I 240207 20:16:46 main:189] Taking the picture 006
+[I 240207 20:19:08 main:189] Taking the picture 001
+[I 240207 20:19:24 main:189] Taking the picture 002
+[I 240207 20:19:41 main:189] Taking the picture 003
+[I 240207 20:19:57 main:189] Taking the picture 004
+[I 240207 20:22:43 main:190] Taking the picture 001
+[I 240207 20:22:59 main:190] Taking the picture 002
+[I 240207 20:23:16 main:190] Taking the picture 003
+[I 240207 20:23:32 main:190] Taking the picture 004
+[I 240207 20:23:49 main:190] Taking the picture 005
+[I 240207 20:24:05 main:190] Taking the picture 006
+[I 240207 20:24:20 main:190] Taking the picture 007
+[I 240207 20:24:38 main:190] Taking the picture 008
+[I 240207 20:24:54 main:190] Taking the picture 009
+[I 240207 20:25:10 main:190] Taking the picture 010
+[I 240207 20:25:27 main:190] Taking the picture 011
+[I 240207 20:25:43 main:190] Taking the picture 012
+[I 240207 20:25:59 main:190] Taking the picture 013
+[I 240207 20:40:21 main:191] Taking the picture 001
+[I 240207 20:40:37 main:191] Taking the picture 002
+[I 240207 20:40:54 main:191] Taking the picture 003
+[I 240207 20:50:26 main:193] Taking the picture 001
+[I 240207 20:50:42 main:193] Taking the picture 002
+[I 240207 20:51:14 main:193] Taking the picture 001
+[I 240207 20:51:30 main:193] Taking the picture 002
