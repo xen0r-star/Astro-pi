@@ -16,28 +16,6 @@ paths = Path(__file__).parent.resolve()
 logzero.logfile(paths / "logFile.log")
 
 class speed:
-    def __init__(self):
-        self.data = {
-            "image1": {
-                "time": 0,
-                "cv": None,
-                "keypoints": None,
-                "descriptors": None,
-                "coordinates": None
-            },
-            "image2": {
-                "time": 0,
-                "cv": None,
-                "keypoints": None,
-                "descriptors": None,
-                "coordinates": None
-            },
-
-            "timeDifference": 0,
-            "matches": None,
-            "speed": 0,
-        }
-
     def speedImage(self, image1, image2, feature=1000, GSD=12648):
         try:
             def getData(image):
@@ -53,40 +31,44 @@ class speed:
                     return None
 
 
-            # get time difference
-            self.data["image1"]["time"] = getData(image1)
-            self.data["image2"]["time"] = getData(image2)
-            self.data["timeDifference"] = self.data["image2"]["time"] - self.data["image1"]["time"]
-            self.data["timeDifference"] =  self.data["timeDifference"].seconds
+            # obtenir la différence d'heure
+            time1 = getData(image1)
+            time2 = getData(image2)
+
+            if None in [time1, time2]:
+                logger.error("Time data is not available in one or both images")
+                return None
+            
+            timeDifference = (time2 - time1).seconds
         
-            # convert to cv
-            self.data["image1"]["cv"] = cv2.imread(str(image1), 0)
-            self.data["image2"]["cv"] = cv2.imread(str(image2), 0)
+            # convertir en cv
+            imageCv1 = cv2.imread(str(image1), 0)
+            imageCv2 = cv2.imread(str(image2), 0)
 
-            # calculate features
+            # calculer les caractéristiques
             orb = cv2.ORB_create(nfeatures = feature)
-            self.data["image1"]["keypoints"], self.data["image1"]["descriptors"] = orb.detectAndCompute(self.data["image1"]["cv"], None)
-            self.data["image2"]["keypoints"], self.data["image2"]["descriptors"] = orb.detectAndCompute(self.data["image2"]["cv"], None)
+            keypoints1, descriptors1 = orb.detectAndCompute(imageCv1, None)
+            keypoints2, descriptors2 = orb.detectAndCompute(imageCv2, None)
 
-            # calculate matches
+            # calculer les correspondances
             bruteForce = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-            self.data["matches"] = bruteForce.match(self.data["image1"]["descriptors"], self.data["image2"]["descriptors"])
-            self.data["matches"] = sorted(self.data["matches"], key=lambda x: x.distance)
+            matches = bruteForce.match(descriptors1, descriptors2)
+            matches = sorted(matches, key=lambda x: x.distance)
 
-            # find matching coordinates
-            self.data["image1"]["coordinates"] = []
-            self.data["image2"]["coordinates"] = []
-            for match in self.data["matches"]:
-                image_1_idx = match.queryIdx
-                image_2_idx = match.trainIdx
-                (x1,y1) = self.data["image1"]["keypoints"][image_1_idx].pt
-                (x2,y2) = self.data["image2"]["keypoints"][image_2_idx].pt
-                self.data["image1"]["coordinates"].append((x1,y1))
-                self.data["image2"]["coordinates"].append((x2,y2))
+            # trouver les coordonnees correspondantes
+            coordinates1 = []
+            coordinates2 = []
+            for match in matches:
+                image1Idx = match.queryIdx
+                image2Idx = match.trainIdx
+                (x1,y1) = keypoints1[image1Idx].pt
+                (x2,y2) = keypoints2[image2Idx].pt
+                coordinates1.append((x1,y1))
+                coordinates2.append((x2,y2))
 
-            # calculate mean distance
+            # calculer la distance moyenne
             allDistances = 0
-            mergedCoordinates = list(zip(self.data["image1"]["coordinates"], self.data["image2"]["coordinates"]))
+            mergedCoordinates = list(zip(coordinates1, coordinates2))
             for coordinate in mergedCoordinates:
                 x_difference = coordinate[0][0] - coordinate[1][0]
                 y_difference = coordinate[0][1] - coordinate[1][1]
@@ -94,11 +76,11 @@ class speed:
                 allDistances = allDistances + distance
             featureDistance = allDistances / len(mergedCoordinates)
 
-            # calculate speed in kmps
-            self.data["speed"] = (featureDistance * GSD / 100000 ) / self.data["timeDifference"]
+            # calculer la vitesse en kmps
+            speed = (featureDistance * GSD / 100000 ) / timeDifference
 
-            logger.info(f"The calculation was made, speed: {self.data['speed']:.4f}") 
-            return self.data["speed"]
+            logger.info(f"The calculation with the images has finished, speed: {speed:.4f}") 
+            return speed
         
         except Exception as error:
             logger.exception(f"An error occurs when calculating speed with images: {error}")
@@ -131,17 +113,25 @@ class speed:
 
             time1, lat1, lon1 = getData(image1)
             time2, lat2, lon2 = getData(image2)
-            time = time2 - time1
+
+            if None in [time1, lat1, lon1, time2, lat2, lon2]:
+                logger.error("GPS data is not available in one or both images")
+                return None
+
+            timeDifference = (time2 - time1).seconds
             
             # formule de haversine
             a = math.sin((math.radians(lat2) - math.radians(lat1)) / 2)**2 + math.cos(math.radians(lat1)) * math.cos(math.radians(lat2)) * math.sin((math.radians(lon2) - math.radians(lon1)) / 2)**2
             c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
             distance = 6371.0097714 * c
 
-            # return speed
+            speed = ((distance * 1000) / timeDifference) / 1000
+
+            logger.info(f"The calculation with the coordinated values has finished, speed: {speed:.4f}") 
+            return speed
         
         except Exception as error:
-            logger.exception(f"An error occurs when calculating speed with images: {error}")
+            logger.exception(f"An error occurs when calculating speed with coordinated: {error}")
             return 0
 
 
@@ -234,9 +224,12 @@ class statistic:
 
         worldMap.save(output)
 
-    def graphicSpeedPicture(self, data):
-        plt.plot(data)
-        plt.legend(['Speed with picture'], loc='lower right')
+    def graphicSpeedPicture(self, data1, data2):
+        plt.plot(data1)
+        plt.plot(data2)
+        plt.plot([7.66] * len(data1))
+
+        plt.legend(['Speed with picture', 'Speed with coordinated', 'average speed'], loc='upper left')
         plt.savefig(self.output / 'graphic_SpeedPicture.png')
 
 
@@ -251,18 +244,19 @@ if __name__ == "__main__":
         speedPicture, speedCoordinated = [], []
         coordinated = []
 
-        for i in range(15): 
+        for i in range(21): 
             pictureNumber, pictureCoordinated = pictureCamera.take(2)
-            # coordinated.append(pictureCoordinated)
+            coordinated.append(pictureCoordinated)
 
             if pictureNumber != None:
-                # speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
-                speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg')
-                # speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
+                speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
+                speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
+
+            speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
             
-        # speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
-        # statistic.drawPointMap(coordinated)
-        # statistic.graphicSpeedPicture(speedPicture)
+        speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
+        statistic.drawPointMap(coordinated)
+        statistic.graphicSpeedPicture(speedPicture, speedCoordinated)
 
     except Exception as error:
         logger.exception(f"an error occurs when the main function: {error}")
