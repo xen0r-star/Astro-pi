@@ -94,6 +94,7 @@ class speed:
                         img = exifImage(imageFile)
 
                         timeStr = img.get("datetime_original")
+                        # print(img.get("subsec_time_original"))
                         time = datetime.strptime(timeStr, '%Y:%m:%d %H:%M:%S')
 
                         lat, lon = img.get("gps_latitude"), img.get("gps_longitude")
