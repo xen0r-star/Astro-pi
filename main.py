@@ -94,7 +94,6 @@ class speed:
                         img = exifImage(imageFile)
 
                         timeStr = img.get("datetime_original")
-                        # print(img.get("subsec_time_original"))
                         time = datetime.strptime(timeStr, '%Y:%m:%d %H:%M:%S')
 
                         lat, lon = img.get("gps_latitude"), img.get("gps_longitude")
@@ -225,12 +224,12 @@ class statistic:
 
         worldMap.save(output)
 
-    def graphicSpeedPicture(self, data1, data2):
+    def graphicSpeedPicture(self, data1, data2, data3):
         plt.plot(data1)
         plt.plot(data2)
-        plt.plot([7.66] * len(data1))
+        plt.plot(data3)
 
-        plt.legend(['Speed with picture', 'Speed with coordinated', 'average speed'], loc='upper left')
+        plt.legend(['Speed with picture', 'Speed with coordinated', 'Average speed'], loc='upper left')
         plt.savefig(self.output / 'graphic_SpeedPicture.png')
 
 
@@ -242,7 +241,7 @@ if __name__ == "__main__":
         speedDataStorage = dataStorage(paths / 'result.txt')
         statistic = statistic(paths / "Statistic")
         
-        speedPicture, speedCoordinated = [], []
+        speedPicture, speedCoordinated, speedAverage = [], [], []
         coordinated = []
 
         for i in range(21): 
@@ -253,11 +252,12 @@ if __name__ == "__main__":
                 speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
                 speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
-            speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
+            speedAverage.append((speedPicture[i] + speedCoordinated[i]) / 2)
+            speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
             
-        speedDataStorage.speedData("{:.4f}".format(np.mean(speedPicture)))
+        speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
         statistic.drawPointMap(coordinated)
-        statistic.graphicSpeedPicture(speedPicture, speedCoordinated)
+        statistic.graphicSpeedPicture(speedPicture, speedCoordinated, speedAverage)
 
     except Exception as error:
         logger.exception(f"an error occurs when the main function: {error}")
