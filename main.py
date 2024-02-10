@@ -232,6 +232,22 @@ class statistic:
         plt.legend(['Speed with picture', 'Speed with coordinated', 'Average speed'], loc='upper left')
         plt.savefig(self.output / 'graphic_SpeedPicture.png')
 
+    def outlier(self, data):
+        Q1 = np.percentile(data, 25)
+        Q3 = np.percentile(data, 75)
+
+        IQR = Q3 - Q1
+
+        lowLimit = Q1 - 1.5 * IQR
+        upperLimit = Q3 + 1.5 * IQR
+
+        outliersIndices = np.where((data < lowLimit) | (data > upperLimit))
+        print(lowLimit, upperLimit)
+        print(outliersIndices)
+
+        # dataCleaned = [value for i, value in enumerate(data) if outliersIndices.size == 0 or i not in outliersIndices]
+        # return dataCleaned
+
 
 
 if __name__ == "__main__":
@@ -252,6 +268,8 @@ if __name__ == "__main__":
                 speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
                 speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
+            # print(speedPicture)
+            statistic.outlier(speedPicture)
             speedAverage.append((speedPicture[i] + speedCoordinated[i]) / 2)
             speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
             
