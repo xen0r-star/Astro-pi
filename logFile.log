@@ -1,386 +1,184 @@
-[I 240210 13:34:13 main:179] Taking the picture 001
-[I 240210 13:34:29 main:179] Taking the picture 002
-[I 240210 13:34:30 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 13:34:30 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[I 240210 13:34:30 main:196] Speed data saved in the file
-[I 240210 13:34:47 main:179] Taking the picture 003
-[I 240210 13:35:02 main:179] Taking the picture 004
-[I 240210 13:35:03 main:82] The calculation with the images has finished, speed: 7.0013
-[I 240210 13:35:03 main:130] The calculation with the coordinated values has finished, speed: 6.6931
-[I 240210 13:35:03 main:196] Speed data saved in the file
-[I 240210 13:35:19 main:179] Taking the picture 005
-[I 240210 13:35:36 main:179] Taking the picture 006
-[I 240210 13:35:36 main:82] The calculation with the images has finished, speed: 7.0256
-[I 240210 13:35:36 main:130] The calculation with the coordinated values has finished, speed: 6.6788
-[I 240210 13:35:36 main:196] Speed data saved in the file
-[I 240210 13:35:51 main:179] Taking the picture 007
-[I 240210 13:36:08 main:179] Taking the picture 008
-[I 240210 13:36:09 main:82] The calculation with the images has finished, speed: 7.0244
-[I 240210 13:36:09 main:130] The calculation with the coordinated values has finished, speed: 6.6538
-[I 240210 13:36:09 main:196] Speed data saved in the file
-[I 240210 13:36:25 main:179] Taking the picture 009
-[I 240210 13:36:41 main:179] Taking the picture 010
-[I 240210 13:36:41 main:82] The calculation with the images has finished, speed: 10.2975
-[I 240210 13:36:41 main:130] The calculation with the coordinated values has finished, speed: 6.9322
-[I 240210 13:36:41 main:196] Speed data saved in the file
-[I 240210 13:36:58 main:179] Taking the picture 011
-[I 240210 13:37:14 main:179] Taking the picture 012
-[I 240210 13:37:14 main:82] The calculation with the images has finished, speed: 9.0660
-[I 240210 13:37:14 main:130] The calculation with the coordinated values has finished, speed: 6.8829
-[I 240210 13:37:14 main:196] Speed data saved in the file
-[I 240210 13:37:30 main:179] Taking the picture 013
-[I 240210 13:37:46 main:179] Taking the picture 014
-[I 240210 13:37:46 main:82] The calculation with the images has finished, speed: 7.4851
-[I 240210 13:37:46 main:130] The calculation with the coordinated values has finished, speed: 6.6914
-[I 240210 13:37:46 main:196] Speed data saved in the file
-[I 240210 13:37:59 main:179] Taking the picture 015
-[I 240210 13:38:15 main:179] Taking the picture 016
-[I 240210 13:38:15 main:82] The calculation with the images has finished, speed: 8.7972
-[I 240210 13:38:15 main:130] The calculation with the coordinated values has finished, speed: 7.1860
-[I 240210 13:38:15 main:196] Speed data saved in the file
-[I 240210 13:38:31 main:179] Taking the picture 017
-[I 240210 13:38:48 main:179] Taking the picture 018
-[I 240210 13:38:48 main:82] The calculation with the images has finished, speed: 9.9373
-[I 240210 13:38:48 main:130] The calculation with the coordinated values has finished, speed: 7.0047
-[I 240210 13:38:48 main:196] Speed data saved in the file
-[I 240210 13:39:04 main:179] Taking the picture 019
-[I 240210 13:39:19 main:179] Taking the picture 020
-[I 240210 13:39:19 main:82] The calculation with the images has finished, speed: 5.7139
-[I 240210 13:39:19 main:130] The calculation with the coordinated values has finished, speed: 7.1552
-[I 240210 13:39:19 main:196] Speed data saved in the file
-[I 240210 13:39:36 main:179] Taking the picture 021
-[I 240210 13:39:51 main:179] Taking the picture 022
-[I 240210 13:39:52 main:82] The calculation with the images has finished, speed: 6.6369
-[I 240210 13:39:52 main:130] The calculation with the coordinated values has finished, speed: 6.7623
-[I 240210 13:39:52 main:196] Speed data saved in the file
-[I 240210 13:40:10 main:179] Taking the picture 023
-[I 240210 13:40:27 main:179] Taking the picture 024
-[I 240210 13:40:27 main:82] The calculation with the images has finished, speed: 6.7368
-[I 240210 13:40:27 main:130] The calculation with the coordinated values has finished, speed: 7.1304
-[I 240210 13:40:27 main:196] Speed data saved in the file
-[I 240210 13:40:42 main:179] Taking the picture 025
-[I 240210 13:40:59 main:179] Taking the picture 026
-[I 240210 13:40:59 main:82] The calculation with the images has finished, speed: 7.6794
-[I 240210 13:40:59 main:130] The calculation with the coordinated values has finished, speed: 7.1848
-[I 240210 13:40:59 main:196] Speed data saved in the file
-[I 240210 13:41:16 main:179] Taking the picture 027
-[I 240210 13:41:31 main:179] Taking the picture 028
-[I 240210 13:41:32 main:82] The calculation with the images has finished, speed: 8.4457
-[I 240210 13:41:32 main:130] The calculation with the coordinated values has finished, speed: 6.5778
-[I 240210 13:41:32 main:196] Speed data saved in the file
-[I 240210 13:41:46 main:179] Taking the picture 029
-[I 240210 13:42:01 main:179] Taking the picture 030
-[I 240210 13:42:01 main:82] The calculation with the images has finished, speed: 7.5739
-[I 240210 13:42:01 main:130] The calculation with the coordinated values has finished, speed: 7.1420
-[I 240210 13:42:01 main:196] Speed data saved in the file
-[I 240210 13:42:18 main:179] Taking the picture 031
-[I 240210 13:42:34 main:179] Taking the picture 032
-[I 240210 13:42:34 main:82] The calculation with the images has finished, speed: 6.7961
-[I 240210 13:42:34 main:130] The calculation with the coordinated values has finished, speed: 6.7555
-[I 240210 13:42:34 main:196] Speed data saved in the file
-[I 240210 13:42:48 main:179] Taking the picture 033
-[I 240210 13:43:06 main:179] Taking the picture 034
-[I 240210 13:43:06 main:82] The calculation with the images has finished, speed: 6.9381
-[I 240210 13:43:06 main:130] The calculation with the coordinated values has finished, speed: 6.8184
-[I 240210 13:43:06 main:196] Speed data saved in the file
-[I 240210 13:43:21 main:179] Taking the picture 035
-[I 240210 13:43:37 main:179] Taking the picture 036
-[I 240210 13:43:38 main:82] The calculation with the images has finished, speed: 7.9265
-[I 240210 13:43:38 main:130] The calculation with the coordinated values has finished, speed: 7.0352
-[I 240210 13:43:38 main:196] Speed data saved in the file
-[I 240210 13:43:54 main:179] Taking the picture 037
-[I 240210 13:44:10 main:179] Taking the picture 038
-[I 240210 13:44:10 main:82] The calculation with the images has finished, speed: 12.0866
-[I 240210 13:44:10 main:130] The calculation with the coordinated values has finished, speed: 7.0417
-[I 240210 13:44:10 main:196] Speed data saved in the file
-[I 240210 13:44:25 main:179] Taking the picture 039
-[I 240210 13:44:38 main:179] Taking the picture 040
-[I 240210 13:44:38 main:82] The calculation with the images has finished, speed: 25.7577
-[I 240210 13:44:38 main:130] The calculation with the coordinated values has finished, speed: 7.3626
-[I 240210 13:44:38 main:196] Speed data saved in the file
-[I 240210 13:44:54 main:179] Taking the picture 041
-[I 240210 13:45:11 main:179] Taking the picture 042
-[I 240210 13:45:11 main:82] The calculation with the images has finished, speed: 8.0862
-[I 240210 13:45:11 main:130] The calculation with the coordinated values has finished, speed: 6.6464
-[I 240210 13:45:11 main:196] Speed data saved in the file
-[I 240210 13:45:11 main:196] Speed data saved in the file
-[I 240210 22:32:00 main:179] Taking the picture 001
-[I 240210 22:32:16 main:179] Taking the picture 002
-[I 240210 22:32:17 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 22:32:17 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[I 240210 22:32:17 main:196] Speed data saved in the file
-[I 240210 22:32:33 main:179] Taking the picture 003
-[I 240210 22:32:49 main:179] Taking the picture 004
-[I 240210 22:32:49 main:82] The calculation with the images has finished, speed: 7.0013
-[I 240210 22:32:49 main:130] The calculation with the coordinated values has finished, speed: 6.6931
-[I 240210 22:32:49 main:196] Speed data saved in the file
-[I 240210 22:33:06 main:179] Taking the picture 005
-[I 240210 22:33:22 main:179] Taking the picture 006
-[I 240210 22:33:22 main:82] The calculation with the images has finished, speed: 7.0256
-[I 240210 22:33:22 main:130] The calculation with the coordinated values has finished, speed: 6.6788
-[I 240210 22:33:22 main:196] Speed data saved in the file
-[I 240210 22:33:37 main:179] Taking the picture 007
-[I 240210 22:33:55 main:179] Taking the picture 008
-[I 240210 22:33:55 main:82] The calculation with the images has finished, speed: 7.0244
-[I 240210 22:33:55 main:130] The calculation with the coordinated values has finished, speed: 6.6538
-[I 240210 22:33:55 main:196] Speed data saved in the file
-[I 240210 22:34:11 main:179] Taking the picture 009
-[I 240210 22:34:27 main:179] Taking the picture 010
-[I 240210 22:34:27 main:82] The calculation with the images has finished, speed: 10.2975
-[I 240210 22:34:27 main:130] The calculation with the coordinated values has finished, speed: 6.9322
-[I 240210 22:34:27 main:196] Speed data saved in the file
-[I 240210 22:38:56 main:179] Taking the picture 001
-[I 240210 22:39:12 main:179] Taking the picture 002
-[I 240210 22:39:12 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 22:39:12 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[E 240210 22:39:12 main:279] an error occurs when the main function: 'tuple' object has no attribute 'size'
-    Traceback (most recent call last):
-      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 270, in <module>
-        print(statistic.outlier(speedPicture))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 246, in outlier
-        dataCleaned = [value for i, value in enumerate(data) if outliersIndices.size == 0 or i not in outliersIndices]
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 246, in <listcomp>
-        dataCleaned = [value for i, value in enumerate(data) if outliersIndices.size == 0 or i not in outliersIndices]
-                                                                ^^^^^^^^^^^^^^^^^^^^
-    AttributeError: 'tuple' object has no attribute 'size'
-[I 240210 22:42:05 main:179] Taking the picture 001
-[I 240210 22:42:21 main:179] Taking the picture 002
-[I 240210 22:42:21 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 22:42:21 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[E 240210 22:42:21 main:279] an error occurs when the main function: 'tuple' object has no attribute 'size'
-    Traceback (most recent call last):
-      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 270, in <module>
-        print(statistic.outlier(speedPicture))
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 246, in outlier
-        dataCleaned = [value for i, value in enumerate(data) if i not in outliersIndices and outliersIndices.size > 0]
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      File "C:\Users\Florian\Desktop\Astro-pi\main.py", line 246, in <listcomp>
-        dataCleaned = [value for i, value in enumerate(data) if i not in outliersIndices and outliersIndices.size > 0]
-                                                                                             ^^^^^^^^^^^^^^^^^^^^
-    AttributeError: 'tuple' object has no attribute 'size'
-[I 240210 22:44:16 main:179] Taking the picture 001
-[I 240210 22:44:32 main:179] Taking the picture 002
-[I 240210 22:44:32 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 22:44:32 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[I 240210 22:44:32 main:196] Speed data saved in the file
-[I 240210 22:44:49 main:179] Taking the picture 003
-[I 240210 22:45:05 main:179] Taking the picture 004
-[I 240210 22:45:05 main:82] The calculation with the images has finished, speed: 7.0013
-[I 240210 22:45:05 main:130] The calculation with the coordinated values has finished, speed: 6.6931
-[I 240210 22:45:05 main:196] Speed data saved in the file
-[I 240210 22:45:22 main:179] Taking the picture 005
-[I 240210 22:46:01 main:179] Taking the picture 001
-[I 240210 22:46:17 main:179] Taking the picture 002
-[I 240210 22:46:17 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 22:46:17 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[I 240210 22:46:17 main:196] Speed data saved in the file
-[I 240210 22:46:34 main:179] Taking the picture 003
-[I 240210 22:46:50 main:179] Taking the picture 004
-[I 240210 22:46:50 main:82] The calculation with the images has finished, speed: 7.0013
-[I 240210 22:46:50 main:130] The calculation with the coordinated values has finished, speed: 6.6931
-[I 240210 22:46:50 main:196] Speed data saved in the file
-[I 240210 22:47:07 main:179] Taking the picture 005
-[I 240210 22:47:23 main:179] Taking the picture 006
-[I 240210 22:47:23 main:82] The calculation with the images has finished, speed: 7.0256
-[I 240210 22:47:23 main:130] The calculation with the coordinated values has finished, speed: 6.6788
-[I 240210 22:47:23 main:196] Speed data saved in the file
-[I 240210 22:47:38 main:179] Taking the picture 007
-[I 240210 22:47:56 main:179] Taking the picture 008
-[I 240210 22:47:56 main:82] The calculation with the images has finished, speed: 7.0244
-[I 240210 22:47:56 main:130] The calculation with the coordinated values has finished, speed: 6.6538
-[I 240210 22:47:56 main:196] Speed data saved in the file
-[I 240210 22:48:12 main:179] Taking the picture 009
-[I 240210 22:48:28 main:179] Taking the picture 010
-[I 240210 22:48:28 main:82] The calculation with the images has finished, speed: 10.2975
-[I 240210 22:48:28 main:130] The calculation with the coordinated values has finished, speed: 6.9322
-[I 240210 22:48:28 main:196] Speed data saved in the file
-[I 240210 22:48:45 main:179] Taking the picture 011
-[I 240210 22:49:01 main:179] Taking the picture 012
-[I 240210 22:49:01 main:82] The calculation with the images has finished, speed: 9.0660
-[I 240210 22:49:01 main:130] The calculation with the coordinated values has finished, speed: 6.8829
-[I 240210 22:49:01 main:196] Speed data saved in the file
-[I 240210 22:49:17 main:179] Taking the picture 013
-[I 240210 22:49:33 main:179] Taking the picture 014
-[I 240210 22:49:33 main:82] The calculation with the images has finished, speed: 7.4851
-[I 240210 22:49:33 main:130] The calculation with the coordinated values has finished, speed: 6.6914
-[I 240210 22:49:33 main:196] Speed data saved in the file
-[I 240210 22:49:47 main:179] Taking the picture 015
-[I 240210 22:50:02 main:179] Taking the picture 016
-[I 240210 22:50:02 main:82] The calculation with the images has finished, speed: 8.7972
-[I 240210 22:50:02 main:130] The calculation with the coordinated values has finished, speed: 7.1860
-[I 240210 22:50:02 main:196] Speed data saved in the file
-[I 240210 22:50:18 main:179] Taking the picture 017
-[I 240210 22:50:35 main:179] Taking the picture 018
-[I 240210 22:50:35 main:82] The calculation with the images has finished, speed: 9.9373
-[I 240210 22:50:35 main:130] The calculation with the coordinated values has finished, speed: 7.0047
-[I 240210 22:50:35 main:196] Speed data saved in the file
-[I 240210 22:50:51 main:179] Taking the picture 019
-[I 240210 22:51:06 main:179] Taking the picture 020
-[I 240210 22:51:06 main:82] The calculation with the images has finished, speed: 5.7139
-[I 240210 22:51:06 main:130] The calculation with the coordinated values has finished, speed: 7.1552
-[I 240210 22:51:06 main:196] Speed data saved in the file
-[I 240210 22:51:23 main:179] Taking the picture 021
-[I 240210 22:51:39 main:179] Taking the picture 022
-[I 240210 22:51:39 main:82] The calculation with the images has finished, speed: 6.6369
-[I 240210 22:51:39 main:130] The calculation with the coordinated values has finished, speed: 6.7623
-[I 240210 22:51:39 main:196] Speed data saved in the file
-[I 240210 22:51:57 main:179] Taking the picture 023
-[I 240210 22:52:14 main:179] Taking the picture 024
-[I 240210 22:52:14 main:82] The calculation with the images has finished, speed: 6.7368
-[I 240210 22:52:14 main:130] The calculation with the coordinated values has finished, speed: 7.1304
-[I 240210 22:52:14 main:196] Speed data saved in the file
-[I 240210 22:52:29 main:179] Taking the picture 025
-[I 240210 22:52:46 main:179] Taking the picture 026
-[I 240210 22:52:46 main:82] The calculation with the images has finished, speed: 7.6794
-[I 240210 22:52:46 main:130] The calculation with the coordinated values has finished, speed: 7.1848
-[I 240210 22:52:46 main:196] Speed data saved in the file
-[I 240210 22:53:03 main:179] Taking the picture 027
-[I 240210 22:53:19 main:179] Taking the picture 028
-[I 240210 22:53:19 main:82] The calculation with the images has finished, speed: 8.4457
-[I 240210 22:53:19 main:130] The calculation with the coordinated values has finished, speed: 6.5778
-[I 240210 22:53:19 main:196] Speed data saved in the file
-[I 240210 22:53:33 main:179] Taking the picture 029
-[I 240210 22:53:48 main:179] Taking the picture 030
-[I 240210 22:53:48 main:82] The calculation with the images has finished, speed: 7.5739
-[I 240210 22:53:48 main:130] The calculation with the coordinated values has finished, speed: 7.1420
-[I 240210 22:53:48 main:196] Speed data saved in the file
-[I 240210 22:54:05 main:179] Taking the picture 031
-[I 240210 22:54:21 main:179] Taking the picture 032
-[I 240210 22:54:21 main:82] The calculation with the images has finished, speed: 6.7961
-[I 240210 22:54:21 main:130] The calculation with the coordinated values has finished, speed: 6.7555
-[I 240210 22:54:21 main:196] Speed data saved in the file
-[I 240210 22:54:35 main:179] Taking the picture 033
-[I 240210 22:54:53 main:179] Taking the picture 034
-[I 240210 22:54:53 main:82] The calculation with the images has finished, speed: 6.9381
-[I 240210 22:54:53 main:130] The calculation with the coordinated values has finished, speed: 6.8184
-[I 240210 22:54:53 main:196] Speed data saved in the file
-[I 240210 22:55:09 main:179] Taking the picture 035
-[I 240210 22:55:25 main:179] Taking the picture 036
-[I 240210 22:55:25 main:82] The calculation with the images has finished, speed: 7.9265
-[I 240210 22:55:25 main:130] The calculation with the coordinated values has finished, speed: 7.0352
-[I 240210 22:55:25 main:196] Speed data saved in the file
-[I 240210 22:55:41 main:179] Taking the picture 037
-[I 240210 22:55:57 main:179] Taking the picture 038
-[I 240210 22:55:57 main:82] The calculation with the images has finished, speed: 12.0866
-[I 240210 22:55:57 main:130] The calculation with the coordinated values has finished, speed: 7.0417
-[I 240210 22:55:57 main:196] Speed data saved in the file
-[I 240210 22:56:13 main:179] Taking the picture 039
-[I 240210 22:56:25 main:179] Taking the picture 040
-[I 240210 22:56:25 main:82] The calculation with the images has finished, speed: 25.7577
-[I 240210 22:56:25 main:130] The calculation with the coordinated values has finished, speed: 7.3626
-[I 240210 22:56:25 main:196] Speed data saved in the file
-[I 240210 22:56:41 main:179] Taking the picture 041
-[I 240210 22:56:58 main:179] Taking the picture 042
-[I 240210 22:56:58 main:82] The calculation with the images has finished, speed: 8.0862
-[I 240210 22:56:58 main:130] The calculation with the coordinated values has finished, speed: 6.6464
-[I 240210 22:56:58 main:196] Speed data saved in the file
-[I 240210 22:56:58 main:196] Speed data saved in the file
-[I 240210 22:58:58 main:179] Taking the picture 001
-[I 240210 22:59:14 main:179] Taking the picture 002
-[I 240210 22:59:14 main:82] The calculation with the images has finished, speed: 11.5177
-[I 240210 22:59:14 main:130] The calculation with the coordinated values has finished, speed: 6.7067
-[I 240210 22:59:14 main:196] Speed data saved in the file
-[I 240210 22:59:31 main:179] Taking the picture 003
-[I 240210 22:59:47 main:179] Taking the picture 004
-[I 240210 22:59:47 main:82] The calculation with the images has finished, speed: 7.0013
-[I 240210 22:59:47 main:130] The calculation with the coordinated values has finished, speed: 6.6931
-[I 240210 22:59:47 main:196] Speed data saved in the file
-[I 240210 23:00:04 main:179] Taking the picture 005
-[I 240210 23:00:20 main:179] Taking the picture 006
-[I 240210 23:00:20 main:82] The calculation with the images has finished, speed: 7.0256
-[I 240210 23:00:20 main:130] The calculation with the coordinated values has finished, speed: 6.6788
-[I 240210 23:00:20 main:196] Speed data saved in the file
-[I 240210 23:00:35 main:179] Taking the picture 007
-[I 240210 23:00:53 main:179] Taking the picture 008
-[I 240210 23:00:53 main:82] The calculation with the images has finished, speed: 7.0244
-[I 240210 23:00:53 main:130] The calculation with the coordinated values has finished, speed: 6.6538
-[I 240210 23:00:53 main:196] Speed data saved in the file
-[I 240210 23:01:09 main:179] Taking the picture 009
-[I 240210 23:01:25 main:179] Taking the picture 010
-[I 240210 23:01:25 main:82] The calculation with the images has finished, speed: 10.2975
-[I 240210 23:01:25 main:130] The calculation with the coordinated values has finished, speed: 6.9322
-[I 240210 23:01:25 main:196] Speed data saved in the file
-[I 240210 23:01:42 main:179] Taking the picture 011
-[I 240210 23:01:58 main:179] Taking the picture 012
-[I 240210 23:01:58 main:82] The calculation with the images has finished, speed: 9.0660
-[I 240210 23:01:58 main:130] The calculation with the coordinated values has finished, speed: 6.8829
-[I 240210 23:01:58 main:196] Speed data saved in the file
-[I 240210 23:02:14 main:179] Taking the picture 013
-[I 240210 23:02:30 main:179] Taking the picture 014
-[I 240210 23:02:30 main:82] The calculation with the images has finished, speed: 7.4851
-[I 240210 23:02:30 main:130] The calculation with the coordinated values has finished, speed: 6.6914
-[I 240210 23:02:30 main:196] Speed data saved in the file
-[I 240210 23:02:44 main:179] Taking the picture 015
-[I 240210 23:02:59 main:179] Taking the picture 016
-[I 240210 23:02:59 main:82] The calculation with the images has finished, speed: 8.7972
-[I 240210 23:02:59 main:130] The calculation with the coordinated values has finished, speed: 7.1860
-[I 240210 23:02:59 main:196] Speed data saved in the file
-[I 240210 23:03:15 main:179] Taking the picture 017
-[I 240210 23:03:32 main:179] Taking the picture 018
-[I 240210 23:03:32 main:82] The calculation with the images has finished, speed: 9.9373
-[I 240210 23:03:32 main:130] The calculation with the coordinated values has finished, speed: 7.0047
-[I 240210 23:03:32 main:196] Speed data saved in the file
-[I 240210 23:03:48 main:179] Taking the picture 019
-[I 240210 23:04:03 main:179] Taking the picture 020
-[I 240210 23:04:03 main:82] The calculation with the images has finished, speed: 5.7139
-[I 240210 23:04:03 main:130] The calculation with the coordinated values has finished, speed: 7.1552
-[I 240210 23:04:03 main:196] Speed data saved in the file
-[I 240210 23:04:20 main:179] Taking the picture 021
-[I 240210 23:04:36 main:179] Taking the picture 022
-[I 240210 23:04:36 main:82] The calculation with the images has finished, speed: 6.6369
-[I 240210 23:04:36 main:130] The calculation with the coordinated values has finished, speed: 6.7623
-[I 240210 23:04:36 main:196] Speed data saved in the file
-[I 240210 23:04:54 main:179] Taking the picture 023
-[I 240210 23:05:11 main:179] Taking the picture 024
-[I 240210 23:05:11 main:82] The calculation with the images has finished, speed: 6.7368
-[I 240210 23:05:11 main:130] The calculation with the coordinated values has finished, speed: 7.1304
-[I 240210 23:05:12 main:196] Speed data saved in the file
-[I 240210 23:05:26 main:179] Taking the picture 025
-[I 240210 23:05:43 main:179] Taking the picture 026
-[I 240210 23:05:43 main:82] The calculation with the images has finished, speed: 7.6794
-[I 240210 23:05:43 main:130] The calculation with the coordinated values has finished, speed: 7.1848
-[I 240210 23:05:43 main:196] Speed data saved in the file
-[I 240210 23:06:00 main:179] Taking the picture 027
-[I 240210 23:06:16 main:179] Taking the picture 028
-[I 240210 23:06:16 main:82] The calculation with the images has finished, speed: 8.4457
-[I 240210 23:06:16 main:130] The calculation with the coordinated values has finished, speed: 6.5778
-[I 240210 23:06:16 main:196] Speed data saved in the file
-[I 240210 23:06:30 main:179] Taking the picture 029
-[I 240210 23:06:45 main:179] Taking the picture 030
-[I 240210 23:06:45 main:82] The calculation with the images has finished, speed: 7.5739
-[I 240210 23:06:45 main:130] The calculation with the coordinated values has finished, speed: 7.1420
-[I 240210 23:06:45 main:196] Speed data saved in the file
-[I 240210 23:07:02 main:179] Taking the picture 031
-[I 240210 23:07:18 main:179] Taking the picture 032
-[I 240210 23:07:18 main:82] The calculation with the images has finished, speed: 6.7961
-[I 240210 23:07:18 main:130] The calculation with the coordinated values has finished, speed: 6.7555
-[I 240210 23:07:18 main:196] Speed data saved in the file
-[I 240210 23:07:32 main:179] Taking the picture 033
-[I 240210 23:07:50 main:179] Taking the picture 034
-[I 240210 23:07:50 main:82] The calculation with the images has finished, speed: 6.9381
-[I 240210 23:07:50 main:130] The calculation with the coordinated values has finished, speed: 6.8184
-[I 240210 23:07:50 main:196] Speed data saved in the file
-[I 240210 23:08:06 main:179] Taking the picture 035
-[I 240210 23:08:22 main:179] Taking the picture 036
-[I 240210 23:08:22 main:82] The calculation with the images has finished, speed: 7.9265
-[I 240210 23:08:22 main:130] The calculation with the coordinated values has finished, speed: 7.0352
-[I 240210 23:08:22 main:196] Speed data saved in the file
-[I 240210 23:08:38 main:179] Taking the picture 037
-[I 240210 23:08:54 main:179] Taking the picture 038
-[I 240210 23:08:54 main:82] The calculation with the images has finished, speed: 12.0866
-[I 240210 23:08:54 main:130] The calculation with the coordinated values has finished, speed: 7.0417
-[I 240210 23:08:54 main:196] Speed data saved in the file
-[I 240210 23:09:10 main:179] Taking the picture 039
-[I 240210 23:09:22 main:179] Taking the picture 040
-[I 240210 23:09:22 main:82] The calculation with the images has finished, speed: 25.7577
-[I 240210 23:09:22 main:130] The calculation with the coordinated values has finished, speed: 7.3626
-[I 240210 23:09:22 main:196] Speed data saved in the file
-[I 240210 23:09:38 main:179] Taking the picture 041
-[I 240210 23:09:55 main:179] Taking the picture 042
-[I 240210 23:09:55 main:82] The calculation with the images has finished, speed: 8.0862
-[I 240210 23:09:55 main:130] The calculation with the coordinated values has finished, speed: 6.6464
-[I 240210 23:09:55 main:196] Speed data saved in the file
-[I 240210 23:09:55 main:196] Speed data saved in the file
+[I 240211 18:59:58 main:33] Folder check is complete
+[I 240211 18:59:58 main:45] File check is complete
+[I 240211 18:59:58 main:55] Map file check is complete
+[I 240211 19:00:16 main:228] Taking the picture 001
+[I 240211 19:00:32 main:228] Taking the picture 002
+[I 240211 19:00:33 main:127] The calculation with the images has finished, speed: 11.5177
+[I 240211 19:00:33 main:175] The calculation with the coordinated values has finished, speed: 6.7067
+[I 240211 19:00:33 main:251] Speed data saved in the file
+[I 240211 19:00:49 main:228] Taking the picture 003
+[I 240211 19:01:05 main:228] Taking the picture 004
+[I 240211 19:01:05 main:127] The calculation with the images has finished, speed: 7.0013
+[I 240211 19:01:05 main:175] The calculation with the coordinated values has finished, speed: 6.6931
+[I 240211 19:01:05 main:251] Speed data saved in the file
+[I 240211 19:01:22 main:228] Taking the picture 005
+[I 240211 19:01:38 main:228] Taking the picture 006
+[I 240211 19:01:38 main:127] The calculation with the images has finished, speed: 7.0256
+[I 240211 19:01:38 main:175] The calculation with the coordinated values has finished, speed: 6.6788
+[I 240211 19:01:38 main:251] Speed data saved in the file
+[I 240211 19:01:53 main:228] Taking the picture 007
+[I 240211 19:02:11 main:228] Taking the picture 008
+[I 240211 19:02:11 main:127] The calculation with the images has finished, speed: 7.0244
+[I 240211 19:02:11 main:175] The calculation with the coordinated values has finished, speed: 6.6538
+[I 240211 19:02:11 main:251] Speed data saved in the file
+[I 240211 19:02:27 main:228] Taking the picture 009
+[I 240211 19:02:43 main:228] Taking the picture 010
+[I 240211 19:02:43 main:127] The calculation with the images has finished, speed: 10.2975
+[I 240211 19:02:43 main:175] The calculation with the coordinated values has finished, speed: 6.9322
+[I 240211 19:02:43 main:251] Speed data saved in the file
+[I 240211 19:03:00 main:228] Taking the picture 011
+[I 240211 19:03:16 main:228] Taking the picture 012
+[I 240211 19:03:16 main:127] The calculation with the images has finished, speed: 9.0660
+[I 240211 19:03:16 main:175] The calculation with the coordinated values has finished, speed: 6.8829
+[I 240211 19:03:16 main:251] Speed data saved in the file
+[I 240211 19:03:32 main:228] Taking the picture 013
+[I 240211 19:03:48 main:228] Taking the picture 014
+[I 240211 19:03:48 main:127] The calculation with the images has finished, speed: 7.4851
+[I 240211 19:03:48 main:175] The calculation with the coordinated values has finished, speed: 6.6914
+[I 240211 19:03:48 main:251] Speed data saved in the file
+[I 240211 19:04:02 main:228] Taking the picture 015
+[I 240211 19:04:17 main:228] Taking the picture 016
+[I 240211 19:04:17 main:127] The calculation with the images has finished, speed: 8.7972
+[I 240211 19:04:17 main:175] The calculation with the coordinated values has finished, speed: 7.1860
+[I 240211 19:04:17 main:251] Speed data saved in the file
+[I 240211 19:04:33 main:228] Taking the picture 017
+[I 240211 19:04:50 main:228] Taking the picture 018
+[I 240211 19:04:50 main:127] The calculation with the images has finished, speed: 9.9373
+[I 240211 19:04:50 main:175] The calculation with the coordinated values has finished, speed: 7.0047
+[I 240211 19:04:50 main:251] Speed data saved in the file
+[I 240211 19:05:06 main:228] Taking the picture 019
+[I 240211 19:05:21 main:228] Taking the picture 020
+[I 240211 19:05:21 main:127] The calculation with the images has finished, speed: 5.7139
+[I 240211 19:05:21 main:175] The calculation with the coordinated values has finished, speed: 7.1552
+[I 240211 19:05:21 main:251] Speed data saved in the file
+[I 240211 19:05:38 main:228] Taking the picture 021
+[I 240211 19:05:54 main:228] Taking the picture 022
+[I 240211 19:05:54 main:127] The calculation with the images has finished, speed: 6.6369
+[I 240211 19:05:54 main:175] The calculation with the coordinated values has finished, speed: 6.7623
+[I 240211 19:05:54 main:251] Speed data saved in the file
+[I 240211 19:06:12 main:228] Taking the picture 023
+[I 240211 19:06:29 main:228] Taking the picture 024
+[I 240211 19:06:29 main:127] The calculation with the images has finished, speed: 6.7368
+[I 240211 19:06:29 main:175] The calculation with the coordinated values has finished, speed: 7.1304
+[I 240211 19:06:29 main:251] Speed data saved in the file
+[I 240211 19:06:44 main:228] Taking the picture 025
+[I 240211 19:07:01 main:228] Taking the picture 026
+[I 240211 19:07:01 main:127] The calculation with the images has finished, speed: 7.6794
+[I 240211 19:07:01 main:175] The calculation with the coordinated values has finished, speed: 7.1848
+[I 240211 19:07:01 main:251] Speed data saved in the file
+[I 240211 19:07:18 main:228] Taking the picture 027
+[I 240211 19:07:34 main:228] Taking the picture 028
+[I 240211 19:07:34 main:127] The calculation with the images has finished, speed: 8.4457
+[I 240211 19:07:34 main:175] The calculation with the coordinated values has finished, speed: 6.5778
+[I 240211 19:07:34 main:251] Speed data saved in the file
+[I 240211 19:07:48 main:228] Taking the picture 029
+[I 240211 19:08:03 main:228] Taking the picture 030
+[I 240211 19:08:03 main:127] The calculation with the images has finished, speed: 7.5739
+[I 240211 19:08:03 main:175] The calculation with the coordinated values has finished, speed: 7.1420
+[I 240211 19:08:03 main:251] Speed data saved in the file
+[I 240211 19:08:20 main:228] Taking the picture 031
+[I 240211 19:08:36 main:228] Taking the picture 032
+[I 240211 19:08:36 main:127] The calculation with the images has finished, speed: 6.7961
+[I 240211 19:08:36 main:175] The calculation with the coordinated values has finished, speed: 6.7555
+[I 240211 19:08:36 main:251] Speed data saved in the file
+[I 240211 19:08:50 main:228] Taking the picture 033
+[I 240211 19:09:08 main:228] Taking the picture 034
+[I 240211 19:09:08 main:127] The calculation with the images has finished, speed: 6.9381
+[I 240211 19:09:08 main:175] The calculation with the coordinated values has finished, speed: 6.8184
+[I 240211 19:09:08 main:251] Speed data saved in the file
+[I 240211 19:09:08 main:251] Speed data saved in the file
+[I 240211 19:09:09 main:301] The speed graph is complete
+[I 240211 19:09:09 main:286] Map tracking is complete
+[I 240211 19:09:09 main:385] running time -1 day, 23:50:48.842759
+[I 240211 19:42:49 main:33] Folder check is complete
+[I 240211 19:42:49 main:45] File check is complete
+[I 240211 19:42:49 main:55] Map file check is complete
+[I 240211 19:43:07 main:228] Taking the picture 001
+[I 240211 19:43:23 main:228] Taking the picture 002
+[I 240211 19:43:24 main:127] The calculation with the images has finished, speed: 11.5177
+[I 240211 19:43:24 main:175] The calculation with the coordinated values has finished, speed: 6.7067
+[I 240211 19:43:24 main:251] Speed data saved in the file
+[I 240211 19:43:40 main:228] Taking the picture 003
+[I 240211 19:43:56 main:228] Taking the picture 004
+[I 240211 19:43:57 main:127] The calculation with the images has finished, speed: 7.0013
+[I 240211 19:43:57 main:175] The calculation with the coordinated values has finished, speed: 6.6931
+[I 240211 19:43:57 main:251] Speed data saved in the file
+[I 240211 19:44:13 main:228] Taking the picture 005
+[I 240211 19:44:29 main:228] Taking the picture 006
+[I 240211 19:44:30 main:127] The calculation with the images has finished, speed: 7.0256
+[I 240211 19:44:30 main:175] The calculation with the coordinated values has finished, speed: 6.6788
+[I 240211 19:44:30 main:251] Speed data saved in the file
+[I 240211 19:44:44 main:228] Taking the picture 007
+[I 240211 19:45:02 main:228] Taking the picture 008
+[I 240211 19:45:03 main:127] The calculation with the images has finished, speed: 7.0244
+[I 240211 19:45:03 main:175] The calculation with the coordinated values has finished, speed: 6.6538
+[I 240211 19:45:03 main:251] Speed data saved in the file
+[I 240211 19:45:18 main:228] Taking the picture 009
+[I 240211 19:45:34 main:228] Taking the picture 010
+[I 240211 19:45:35 main:127] The calculation with the images has finished, speed: 10.2975
+[I 240211 19:45:35 main:175] The calculation with the coordinated values has finished, speed: 6.9322
+[I 240211 19:45:35 main:251] Speed data saved in the file
+[I 240211 19:45:51 main:228] Taking the picture 011
+[I 240211 19:46:07 main:228] Taking the picture 012
+[I 240211 19:46:08 main:127] The calculation with the images has finished, speed: 9.0660
+[I 240211 19:46:08 main:175] The calculation with the coordinated values has finished, speed: 6.8829
+[I 240211 19:46:08 main:251] Speed data saved in the file
+[I 240211 19:46:23 main:228] Taking the picture 013
+[I 240211 19:46:39 main:228] Taking the picture 014
+[I 240211 19:46:40 main:127] The calculation with the images has finished, speed: 7.4851
+[I 240211 19:46:40 main:175] The calculation with the coordinated values has finished, speed: 6.6914
+[I 240211 19:46:40 main:251] Speed data saved in the file
+[I 240211 19:46:53 main:228] Taking the picture 015
+[I 240211 19:47:08 main:228] Taking the picture 016
+[I 240211 19:47:09 main:127] The calculation with the images has finished, speed: 8.7972
+[I 240211 19:47:09 main:175] The calculation with the coordinated values has finished, speed: 7.1860
+[I 240211 19:47:09 main:251] Speed data saved in the file
+[I 240211 19:47:24 main:228] Taking the picture 017
+[I 240211 19:47:41 main:228] Taking the picture 018
+[I 240211 19:47:42 main:127] The calculation with the images has finished, speed: 9.9373
+[I 240211 19:47:42 main:175] The calculation with the coordinated values has finished, speed: 7.0047
+[I 240211 19:47:42 main:251] Speed data saved in the file
+[I 240211 19:47:57 main:228] Taking the picture 019
+[I 240211 19:48:12 main:228] Taking the picture 020
+[I 240211 19:48:13 main:127] The calculation with the images has finished, speed: 5.7139
+[I 240211 19:48:13 main:175] The calculation with the coordinated values has finished, speed: 7.1552
+[I 240211 19:48:13 main:251] Speed data saved in the file
+[I 240211 19:48:29 main:228] Taking the picture 021
+[I 240211 19:48:45 main:228] Taking the picture 022
+[I 240211 19:48:46 main:127] The calculation with the images has finished, speed: 6.6369
+[I 240211 19:48:46 main:175] The calculation with the coordinated values has finished, speed: 6.7623
+[I 240211 19:48:46 main:251] Speed data saved in the file
+[I 240211 19:49:03 main:228] Taking the picture 023
+[I 240211 19:49:20 main:228] Taking the picture 024
+[I 240211 19:49:21 main:127] The calculation with the images has finished, speed: 6.7368
+[I 240211 19:49:21 main:175] The calculation with the coordinated values has finished, speed: 7.1304
+[I 240211 19:49:21 main:251] Speed data saved in the file
+[I 240211 19:49:35 main:228] Taking the picture 025
+[I 240211 19:49:52 main:228] Taking the picture 026
+[I 240211 19:49:53 main:127] The calculation with the images has finished, speed: 7.6794
+[I 240211 19:49:53 main:175] The calculation with the coordinated values has finished, speed: 7.1848
+[I 240211 19:49:53 main:251] Speed data saved in the file
+[I 240211 19:50:09 main:228] Taking the picture 027
+[I 240211 19:50:25 main:228] Taking the picture 028
+[I 240211 19:50:26 main:127] The calculation with the images has finished, speed: 8.4457
+[I 240211 19:50:26 main:175] The calculation with the coordinated values has finished, speed: 6.5778
+[I 240211 19:50:26 main:251] Speed data saved in the file
+[I 240211 19:50:39 main:228] Taking the picture 029
+[I 240211 19:50:54 main:228] Taking the picture 030
+[I 240211 19:50:55 main:127] The calculation with the images has finished, speed: 7.5739
+[I 240211 19:50:55 main:175] The calculation with the coordinated values has finished, speed: 7.1420
+[I 240211 19:50:55 main:251] Speed data saved in the file
+[I 240211 19:51:11 main:228] Taking the picture 031
+[I 240211 19:51:27 main:228] Taking the picture 032
+[I 240211 19:51:28 main:127] The calculation with the images has finished, speed: 6.7961
+[I 240211 19:51:28 main:175] The calculation with the coordinated values has finished, speed: 6.7555
+[I 240211 19:51:28 main:251] Speed data saved in the file
+[I 240211 19:51:41 main:228] Taking the picture 033
+[I 240211 19:51:59 main:228] Taking the picture 034
+[I 240211 19:52:00 main:127] The calculation with the images has finished, speed: 6.9381
+[I 240211 19:52:00 main:175] The calculation with the coordinated values has finished, speed: 6.8184
+[I 240211 19:52:00 main:251] Speed data saved in the file
+[I 240211 19:52:00 main:251] Speed data saved in the file
+[I 240211 19:52:00 main:301] The speed graph is complete
+[I 240211 19:52:00 main:286] Map tracking is complete
+[I 240211 19:52:00 main:385] running time 0:09:11.090544

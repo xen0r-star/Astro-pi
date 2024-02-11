@@ -1,7 +1,7 @@
+from datetime import datetime, timedelta
 from exif import Image as exifImage
 from PIL import Image, ImageDraw
 import matplotlib.pyplot as plt
-from datetime import datetime
 from picamera import PiCamera
 from logzero import logger
 from pathlib import Path
@@ -15,7 +15,52 @@ import cv2
 paths = Path(__file__).parent.resolve()
 logzero.logfile(paths / "logFile.log")
 
+
+class checking:
+    """
+    Verifie l'existence des dossiers et des fichiers necessaires.
+    """
+    def folder(self):
+        pictureFolder = Path(paths / "Picture")
+        statisticFolder = Path(paths / "Statistic")
+
+        if not pictureFolder.is_dir():
+            pictureFolder.mkdir(parents=True, exist_ok=True)
+        
+        if not statisticFolder.is_dir():
+            statisticFolder.mkdir(parents=True, exist_ok=True)
+        
+        logger.info(f"Folder check is complete") 
+    
+    def file(self):
+        logFile = Path(paths / "logFile.log")
+        resultFile = Path(paths / "result.txt")
+
+        if not logFile.is_file():
+            logFile.touch()
+
+        if not resultFile.is_file():
+            resultFile.touch()
+
+        logger.info(f"File check is complete") 
+    
+    def mapFile(self):
+        mapFile = Path(paths / "Resources" / "map.png")
+
+        if not mapFile.is_file():
+            mapFile = False
+        else:
+            mapFile = True
+
+        logger.info(f"Map file check is complete") 
+
+        return mapFile
+
+
 class speed:
+    """
+    Effectue des calculs de vitesse a partir d'images ou de coordonnees GPS.
+    """
     def speedImage(self, image1, image2, feature=1000, GSD=12648):
         try:
             def getData(image):
@@ -31,7 +76,7 @@ class speed:
                     return None
 
 
-            # obtenir la différence d'heure
+            # obtenir la difference d'heure
             time1 = getData(image1)
             time2 = getData(image2)
 
@@ -45,7 +90,7 @@ class speed:
             imageCv1 = cv2.imread(str(image1), 0)
             imageCv2 = cv2.imread(str(image2), 0)
 
-            # calculer les caractéristiques
+            # calculer les caracteristiques
             orb = cv2.ORB_create(nfeatures = feature)
             keypoints1, descriptors1 = orb.detectAndCompute(imageCv1, None)
             keypoints2, descriptors2 = orb.detectAndCompute(imageCv2, None)
@@ -135,7 +180,11 @@ class speed:
             return 0
 
 
+
 class pictureCamera:
+    """
+    Capture des images avec la camera et enregistre les coordonnees GPS dans les donnees Exif.
+    """
     def __init__(self, resolutionHeight = 4056, resolutionLength = 3040):
         self.pictureNumber = 0
         self.camera = PiCamera()
@@ -184,7 +233,12 @@ class pictureCamera:
         
         return self.pictureNumber, coordinated
 
+
+
 class dataStorage:
+    """
+    Gere le stockage des donnees dans un fichier.
+    """
     def __init__(self, file):
         self.file = file
 
@@ -192,6 +246,7 @@ class dataStorage:
         try:
             with open(self.file, 'w') as file:
                 file.write(data)
+                file.close()
 
             logger.info("Speed data saved in the file")
             return True
@@ -201,66 +256,106 @@ class dataStorage:
             return False
 
 
+
 class statistic:
+    """
+    Genere des statistiques et des graphiques a partir des donnees.
+    """
     def __init__(self, output):
         self.output = output
 
     def drawPointMap(self, coordinated):
-        input = paths / "Resources" / "map.png"
-        output = self.output / "stationsTracking.png"
+        try:
+            input = paths / "Resources" / "map.png"
+            output = self.output / "stationsTracking.png"
 
-        worldMap = Image.open(input)
+            worldMap = Image.open(input)
 
-        for ligne in coordinated:
-            for paire in ligne:
-                latitude, longitude = paire
+            for ligne in coordinated:
+                for paire in ligne:
+                    latitude, longitude = paire
 
-                x = ((longitude * math.pi * 6378137 / 180) + (math.pi * 6378137)) / ((2 * math.pi * 6378137 / 256) / 8)
-                y = (((math.log(math.tan((90 - latitude) * math.pi / 360)) / (math.pi / 180)) * math.pi * 6378137 / 180) + (math.pi * 6378137)) / ((2 * math.pi * 6378137 / 256) / 8)
-                
-                draw = ImageDraw.Draw(worldMap)
-                pointSize = 3
-                draw.ellipse([x - pointSize, y - pointSize, x + pointSize, y + pointSize], fill="#b52b10", outline="#760000")
+                    x = ((longitude * math.pi * 6378137 / 180) + (math.pi * 6378137)) / ((2 * math.pi * 6378137 / 256) / 8)
+                    y = (((math.log(math.tan((90 - latitude) * math.pi / 360)) / (math.pi / 180)) * math.pi * 6378137 / 180) + (math.pi * 6378137)) / ((2 * math.pi * 6378137 / 256) / 8)
+                    
+                    draw = ImageDraw.Draw(worldMap)
+                    pointSize = 3
+                    draw.ellipse([x - pointSize, y - pointSize, x + pointSize, y + pointSize], fill="#b52b10", outline="#760000")
 
-        worldMap.save(output)
+            worldMap.save(output)
+            logger.info(f"Map tracking is complete") 
 
-    def graphicSpeedPicture(self, data1, data2, data3):
-        plt.plot(data1)
-        plt.plot(data2)
-        plt.plot(data3)
+        except Exception as error:
+            logger.exception(f"an error occurs when drawing the tracking: {error}")
 
-        plt.legend(['Speed with picture', 'Speed with coordinated', 'Average speed'], loc='upper left')
-        plt.savefig(self.output / 'graphic_SpeedPicture.png')
+    def graphicSpeedPicture(self, data1_1, data1_2, data2, data3):
+        try:
+            plt.plot(data1_1)
+            plt.plot(data1_2)
+            plt.plot(data2)
+            plt.plot(data3)
+
+            plt.legend(['Speed with picture', 'Speed with picture cleaned', 'Speed with coordinated', 'Average speed'], loc='upper left')
+            plt.savefig(self.output / 'graphic_SpeedPicture.png')
+
+            logger.info(f"The speed graph is complete") 
+
+        except Exception as error:
+            logger.exception(f"an error occurs when creating the speed graph: {error}")
 
     def outlier(self, data):
-        Q1 = np.percentile(data, 25)
-        Q3 = np.percentile(data, 75)
+        try:
+            Q1 = np.percentile(data, 25)
+            Q3 = np.percentile(data, 75)
 
-        IQR = Q3 - Q1
+            IQR = Q3 - Q1
 
-        lowLimit = Q1 - 1.5 * IQR
-        upperLimit = Q3 + 1.5 * IQR
+            lowLimit = Q1 - 1.5 * IQR
+            upperLimit = Q3 + 1.5 * IQR
 
-        outliersIndices = np.where((data < lowLimit) | (data > upperLimit))
-        print(lowLimit, upperLimit)
-        print(outliersIndices)
+            outliersIndices = np.where((data < lowLimit) | (data > upperLimit))
+            print(lowLimit, upperLimit)
 
-        # dataCleaned = [value for i, value in enumerate(data) if outliersIndices.size == 0 or i not in outliersIndices]
-        # return dataCleaned
+            # dataCleaned = [value for value in data]
+            # for index in outliersIndices[0]:
+            #     dataCleaned[index] = None
+
+            # print(dataCleaned)
+
+            return dataCleaned
+                
+        except Exception as error:
+            logger.exception(f"an error occurs with outliers: {error}")
 
 
 
 if __name__ == "__main__":
     try:
+        # Debut du chronometre
+        startTime = datetime.now()
+
+        # Verification des dossiers et fichiers necessaires
+        checking = checking()
+
+        checking.folder()
+        checking.file()
+        mapFile = checking.mapFile()
+
+        # Initialisation des objets pour la capture d'images, le calcul de vitesse, le stockage de donnees et les statistiques
         pictureCamera = pictureCamera()
         speed = speed()
         speedDataStorage = dataStorage(paths / 'result.txt')
         statistic = statistic(paths / "Statistic")
         
+        # Listes pour stocker les donnees de vitesse et les coordonnees GPS
         speedPicture, speedCoordinated, speedAverage = [], [], []
         coordinated = []
 
-        for i in range(21): 
+        # Temps actuel
+        nowTime = datetime.now()
+
+        # Boucle pour capturer les images et calculer la vitesse
+        while (nowTime < startTime + (timedelta(minutes=10) - timedelta(seconds=45))): 
             pictureNumber, pictureCoordinated = pictureCamera.take(2)
             coordinated.append(pictureCoordinated)
 
@@ -268,14 +363,26 @@ if __name__ == "__main__":
                 speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
                 speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
-            # print(speedPicture)
-            statistic.outlier(speedPicture)
-            speedAverage.append((speedPicture[i] + speedCoordinated[i]) / 2)
+            # speedPictureCleaned = statistic.outlier(speedPicture)
+            # speedAverage.append(speedPictureCleaned[i])
+            speedAverage.append((speedPicture[-1] + speedCoordinated[-1]) / 2)
+
+            # Sauvegarde des valeurs
             speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
-            
+
+            # Temps actuel
+            nowTime = datetime.now()
+        
+        # Enregistrement des donnees de vitesse moyenne
         speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
-        statistic.drawPointMap(coordinated)
-        statistic.graphicSpeedPicture(speedPicture, speedCoordinated, speedAverage)
+
+        # Creation de la carte des points et du graphique de vitesse
+        statistic.graphicSpeedPicture(speedPicture, speedPicture, speedCoordinated, speedAverage)
+        if mapFile == True:
+            statistic.drawPointMap(coordinated)
+
+        endTime = datetime.now()
+        logger.info(f"running time {endTime - startTime}")
 
     except Exception as error:
         logger.exception(f"an error occurs when the main function: {error}")

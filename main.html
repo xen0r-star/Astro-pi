@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Python: module main</title>
+    <style>
+        /* Reset des styles par défaut */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body avec fond sombre */
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        /* Conteneur principal */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #58a6ff;
+            margin-bottom: 20px;
+        }
+
+        /* Liens */
+        a {
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tableaux */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            border: 1px solid #30363d;
+        }
+
+        th,
+        td {
+            border: 1px solid #30363d;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #21262d;
+        }
+
+        /* Sections */
+        .section-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #58a6ff;
+        }
+
+        /* Colonnes */
+        .singlecolumn {
+            width: 100%;
+        }
+
+        .multicolumn {
+            width: 25%;
+            float: left;
+
+            color: #58a6ff;
+            text-decoration: none;
+        }
+
+        /* Descriptions */
+        dl {
+            margin-bottom: 15px;
+        }
+
+        dt {
+            font-weight: bold;
+        }
+
+        dd {
+            margin-left: 20px;
+        }
+
+        /* Données */
+        .data-decor {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <table class="header">
+        <tr>
+            <td class="header-title">main.py</td>
+        </tr>
+    </table>
+
+    <table class="section">
+        <tr>
+            <td class="section-title" colspan=3>Modules</td>
+        </tr>
+        <tr>
+            <td class="multicolumn">PIL.Image</td>
+            <td class="multicolumn">PIL.ImageDraw</td>
+            <td class="multicolumn">cv2</td>
+            <td class="multicolumn">logzero</td>
+            <td class="multicolumn">math</td>
+            <td class="multicolumn">numpy</td>
+            <td class="multicolumn">matplotlib.pyplot</td>
+        </tr>
+    </table>
+
+    <table class="section">
+        <tr>
+            <td class="section-title" colspan=3>Classes</td>
+        </tr>
+
+        <tr>
+            <td class="singlecolumn">
+                <dl>
+                    <dt><a href="main.html#dataStorage">dataStorage</a></dt>
+                    <dt><a href="main.html#pictureCamera">pictureCamera</a></dt>
+                    <dt><a href="main.html#speed">speed</a></dt>
+                    <dt><a href="main.html#statistic">statistic</a></dt>
+                </dl>
+
+                <table class="section">
+                    <tr>
+                        <td class="section-title" colspan=3><a name="dataStorage">class dataStorage</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+                        <td class="decor title-decor" colspan=2><span class="code"><a
+                                    href="#dataStorage">dataStorage</a>(file)</span></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td class="singlecolumn">Methods defined here:<br>
+                            <dl>
+                                <dt><a name="dataStorage-__init__"><strong>__init__</strong></a>(self, file)</dt>
+                                <dd><span
+                                        class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span>
+                                </dd>
+                            </dl>
+
+                            <dl>
+                                <dt><a name="dataStorage-speedData"><strong>speedData</strong></a>(self, data)</dt>
+                            </dl>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <table class="section">
+                    <tr class="decor title-decor heading-text">
+                        <td class="section-title" colspan=3>&nbsp;<br><a name="pictureCamera">class
+                                <strong>pictureCamera</strong></a>(<a href="builtins.html#object">builtins.object</a>)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+                        <td class="decor title-decor" colspan=2><span class="code"><a
+                                    href="#pictureCamera">pictureCamera</a>(resolutionHeight=4056,&nbsp;resolutionLength=3040)<br>
+                                &nbsp;<br>
+                                <br>&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td class="singlecolumn">Methods defined here:<br>
+                            <dl>
+                                <dt><a name="pictureCamera-__init__"><strong>__init__</strong></a>(self,
+                                    resolutionHeight=4056, resolutionLength=3040)</dt>
+                                <dd><span
+                                        class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span>
+                                </dd>
+                            </dl>
+
+                            <dl>
+                                <dt><a name="pictureCamera-take"><strong>take</strong></a>(self, number)</dt>
+                            </dl>
+
+                            <hr>
+                            Data descriptors defined here:<br>
+                            <dl>
+                                <dt><strong>__dict__</strong></dt>
+                                <dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+                            </dl>
+                            <dl>
+                                <dt><strong>__weakref__</strong></dt>
+                                <dd><span
+                                        class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span>
+                                </dd>
+                            </dl>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <table class="section">
+                    <tr class="decor title-decor heading-text">
+                        <td class="section-title" colspan=3>&nbsp;<br><a name="speed">class
+                                <strong>speed</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td>
+                    </tr>
+
+                    <tr>
+                        <td class="decor title-decor"><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+                        <td>&nbsp;</td>
+                        <td class="singlecolumn">Methods defined here:<br>
+                            <dl>
+                                <dt><a name="speed-speedCoordinated"><strong>speedCoordinated</strong></a>(self, image1,
+                                    image2)</dt>
+                            </dl>
+
+                            <dl>
+                                <dt><a name="speed-speedImage"><strong>speedImage</strong></a>(self, image1, image2,
+                                    feature=1000, GSD=12648)</dt>
+                            </dl>
+
+                            <hr>
+                            Data descriptors defined here:<br>
+                            <dl>
+                                <dt><strong>__dict__</strong></dt>
+                                <dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+                            </dl>
+                            <dl>
+                                <dt><strong>__weakref__</strong></dt>
+                                <dd><span
+                                        class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span>
+                                </dd>
+                            </dl>
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                <table class="section">
+                    <tr class="decor title-decor heading-text">
+                        <td class="section-title" colspan=3>&nbsp;<br><a name="statistic">class
+                                <strong>statistic</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td>
+                    </tr>
+
+                    <tr>
+                        <td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+                        <td class="decor title-decor" colspan=2><span class="code"><a
+                                    href="#statistic">statistic</a>(output)<br>
+                                &nbsp;<br>
+                                <br>&nbsp;</span></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td class="singlecolumn">Methods defined here:<br>
+                            <dl>
+                                <dt><a name="statistic-__init__"><strong>__init__</strong></a>(self, output)</dt>
+                                <dd><span
+                                        class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span>
+                                </dd>
+                            </dl>
+
+                            <dl>
+                                <dt><a name="statistic-drawPointMap"><strong>drawPointMap</strong></a>(self,
+                                    coordinated)</dt>
+                            </dl>
+
+                            <dl>
+                                <dt><a
+                                        name="statistic-graphicSpeedPicture"><strong>graphicSpeedPicture</strong></a>(self,
+                                    data1, data2, data3)</dt>
+                            </dl>
+
+                            <dl>
+                                <dt><a name="statistic-outlier"><strong>outlier</strong></a>(self, data)</dt>
+                            </dl>
+
+                            <hr>
+                            Data descriptors defined here:<br>
+                            <dl>
+                                <dt><strong>__dict__</strong></dt>
+                                <dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+                            </dl>
+                            <dl>
+                                <dt><strong>__weakref__</strong></dt>
+                                <dd><span
+                                        class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span>
+                                </dd>
+                            </dl>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <p>
+    <table class="section">
+        <tr class="decor data-decor heading-text">
+            <td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td>
+        </tr>
+
+        <tr>
+            <td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+            <td>&nbsp;</td>
+            <td class="singlecolumn"><strong>logger</strong> = &lt;Logger logzero_default (DEBUG)&gt;<br>
+                <strong>paths</strong> = WindowsPath('C:/Users/Florian/Desktop/Astro-pi')
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
