@@ -6,6 +6,7 @@ from picamera import PiCamera
 from logzero import logger
 from pathlib import Path
 from orbit import ISS
+import pandas as pd
 import numpy as np
 import logzero
 import math
@@ -61,7 +62,7 @@ class speed:
     """
     Effectue des calculs de vitesse a partir d'images ou de coordonnees GPS.
     """
-    def speedImage(self, image1, image2, feature=1000, GSD=12648):
+    def speedPicture(self, image1, image2, feature=1000, GSD=12648):
         try:
             def getData(image):
                 try:
@@ -81,7 +82,7 @@ class speed:
             time2 = getData(image2)
 
             if None in [time1, time2]:
-                logger.error("Time data is not available in one or both images")
+                logger.exception("Time data is not available in one or both images")
                 return None
             
             timeDifference = (time2 - time1).seconds
@@ -160,7 +161,7 @@ class speed:
             time2, lat2, lon2 = getData(image2)
 
             if None in [time1, lat1, lon1, time2, lat2, lon2]:
-                logger.error("GPS data is not available in one or both images")
+                logger.exception("GPS data is not available in one or both images")
                 return None
 
             timeDifference = (time2 - time1).seconds
@@ -239,21 +240,42 @@ class dataStorage:
     """
     Gere le stockage des donnees dans un fichier.
     """
-    def __init__(self, file):
-        self.file = file
-
-    def speedData(self, data):
+    def dataFile(self, data, file):
         try:
-            with open(self.file, 'w') as file:
+            with open(file, 'w') as file:
                 file.write(data)
                 file.close()
 
-            logger.info("Speed data saved in the file")
+            logger.info("Data saved in the file")
             return True
         
         except Exception as error:
-            logger.exception(f"an error occurs when saving data: {error}")
+            logger.exception(f"An error occurs when saving data in the file: {error}")
             return False
+        
+    def speedDataFrame(self, speedPicture, speedCoordinated, speedAverage, loopTime, file):
+        try:
+            if Path(file).is_file():
+                df = pd.read_csv(file)
+            else:
+                df = pd.DataFrame(columns=["Speed Picture", "Speed Coordinated", "Speed Average", "Loop Time"])
+
+            Data = [
+                [speedPicture, speedCoordinated, speedAverage, loopTime]
+            ]
+
+            newData = pd.DataFrame(Data, columns=["Speed Picture", "Speed Coordinated", "Speed Average", "Loop Time"])
+            df = pd.concat([df, newData], ignore_index=True)
+
+            df.to_csv(file, index=False)
+
+            logger.info("Speed data saved in the csv")
+            return True
+        
+        except Exception as error:
+            logger.exception(f"An error occurs when saving speed data in the csv: {error}")
+            return False
+
 
 
 
@@ -286,10 +308,11 @@ class statistic:
             logger.info(f"Map tracking is complete") 
 
         except Exception as error:
-            logger.exception(f"an error occurs when drawing the tracking: {error}")
+            logger.exception(f"An error occurs when drawing the tracking: {error}")
 
     def graphicSpeedPicture(self, data1_1, data1_2, data2, data3):
         try:
+            plt.clf()
             plt.plot(data1_1)
             plt.plot(data1_2)
             plt.plot(data2)
@@ -301,7 +324,20 @@ class statistic:
             logger.info(f"The speed graph is complete") 
 
         except Exception as error:
-            logger.exception(f"an error occurs when creating the speed graph: {error}")
+            logger.exception(f"An error occurs when creating the speed graph: {error}")
+
+    def graphicTime(self, data1):
+        try:
+            plt.clf()
+            plt.plot(data1)
+
+            plt.legend(['Time per iteration'], loc='upper left')
+            plt.savefig(self.output / 'graphic_Time.png')
+
+            logger.info(f"The time graph is complete") 
+
+        except Exception as error:
+            logger.exception(f"An error occurs when creating the time graph: {error}")
 
     def outlier(self, data):
         try:
@@ -325,7 +361,7 @@ class statistic:
             return dataCleaned
                 
         except Exception as error:
-            logger.exception(f"an error occurs with outliers: {error}")
+            logger.exception(f"An error occurs with outliers: {error}")
 
 
 
@@ -344,46 +380,57 @@ if __name__ == "__main__":
         # Initialisation des objets pour la capture d'images, le calcul de vitesse, le stockage de donnees et les statistiques
         pictureCamera = pictureCamera()
         speed = speed()
-        speedDataStorage = dataStorage(paths / 'result.txt')
+        dataStorage = dataStorage()
         statistic = statistic(paths / "Statistic")
         
-        # Listes pour stocker les donnees de vitesse et les coordonnees GPS
+        # Listes pour stocker les informations
         speedPicture, speedCoordinated, speedAverage = [], [], []
         coordinated = []
+        loopTime = []
+        pictureNumber = 0
 
         # Temps actuel
         nowTime = datetime.now()
 
         # Boucle pour capturer les images et calculer la vitesse
-        while (nowTime < startTime + (timedelta(minutes=10) - timedelta(seconds=45))): 
+        while ((nowTime < startTime + timedelta(minutes=9)) and (pictureNumber < 42)):
+            startLoopTime = datetime.now()
+
             pictureNumber, pictureCoordinated = pictureCamera.take(2)
             coordinated.append(pictureCoordinated)
 
             if pictureNumber != None:
-                speedPicture.append(speed.speedImage(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
+                speedPicture.append(speed.speedPicture(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
                 speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
             # speedPictureCleaned = statistic.outlier(speedPicture)
             # speedAverage.append(speedPictureCleaned[i])
             speedAverage.append((speedPicture[-1] + speedCoordinated[-1]) / 2)
 
+            # Temps d'iteration
+            endLoopTime = datetime.now()
+            loopTime.append((endLoopTime - startLoopTime).total_seconds())
+
             # Sauvegarde des valeurs
-            speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
+            dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
+            dataStorage.speedDataFrame(speedPicture[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'data.csv')
 
             # Temps actuel
             nowTime = datetime.now()
         
+
         # Enregistrement des donnees de vitesse moyenne
-        speedDataStorage.speedData("{:.4f}".format(np.mean(speedAverage)))
+        dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
 
         # Creation de la carte des points et du graphique de vitesse
         statistic.graphicSpeedPicture(speedPicture, speedPicture, speedCoordinated, speedAverage)
+        statistic.graphicTime(loopTime)
         if mapFile == True:
             statistic.drawPointMap(coordinated)
 
         endTime = datetime.now()
-        logger.info(f"running time {endTime - startTime}")
+        logger.info(f"Running time {endTime - startTime}")
 
     except Exception as error:
-        logger.exception(f"an error occurs when the main function: {error}")
+        logger.exception(f"An error occurs when the main function: {error}")
 

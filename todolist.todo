@@ -18,42 +18,9 @@
         "todo": {
           "content": "Documentation",
           "id": 1707682406426,
-          "level": "default",
+          "level": "warning",
           "done": false,
           "start": 1707682406426
-        }
-      },
-      {
-        "key": 1707682378571,
-        "children": [],
-        "todo": {
-          "content": "Limite a 42 image",
-          "id": 1707682378571,
-          "level": "default",
-          "done": false,
-          "start": 1707682378571
-        }
-      },
-      {
-        "key": 1707682566434,
-        "children": [],
-        "todo": {
-          "content": "Ajouter des sauvegarde de donnée fichier csv",
-          "id": 1707682566434,
-          "level": "default",
-          "done": false,
-          "start": 1707682566434
-        }
-      },
-      {
-        "key": 1707682605571,
-        "children": [],
-        "todo": {
-          "content": "Rajouter graphique de temps",
-          "id": 1707682605571,
-          "level": "default",
-          "done": false,
-          "start": 1707682605571
         }
       },
       {
@@ -80,6 +47,6 @@
     "showEndTime": false,
     "simpleMode": false,
     "lang": "en",
-    "version": "1707682692710"
+    "version": "1707777586944"
   }
 }
