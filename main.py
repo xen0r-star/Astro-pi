@@ -253,18 +253,18 @@ class dataStorage:
             logger.exception(f"An error occurs when saving data in the file: {error}")
             return False
         
-    def speedDataFrame(self, speedPicture, speedCoordinated, speedAverage, loopTime, file):
+    def speedDataFrame(self, speedPicture, speedPictureCleaned, speedCoordinated, speedAverage, loopTime, file):
         try:
             if Path(file).is_file():
                 df = pd.read_csv(file)
             else:
-                df = pd.DataFrame(columns=["Speed Picture", "Speed Coordinated", "Speed Average", "Loop Time"])
+                df = pd.DataFrame(columns=["Speed Picture", "Speed Picture Cleaned", "Speed Coordinated", "Speed Average", "Loop Time"])
 
             Data = [
-                [speedPicture, speedCoordinated, speedAverage, loopTime]
+                [speedPicture, speedPictureCleaned, speedCoordinated, speedAverage, loopTime]
             ]
 
-            newData = pd.DataFrame(Data, columns=["Speed Picture", "Speed Coordinated", "Speed Average", "Loop Time"])
+            newData = pd.DataFrame(Data, columns=["Speed Picture", "Speed Picture Cleaned", "Speed Coordinated", "Speed Average", "Loop Time"])
             df = pd.concat([df, newData], ignore_index=True)
 
             df.to_csv(file, index=False)
@@ -313,12 +313,15 @@ class statistic:
     def graphicSpeedPicture(self, data1_1, data1_2, data2, data3):
         try:
             plt.clf()
-            plt.plot(data1_1)
-            plt.plot(data1_2)
-            plt.plot(data2)
-            plt.plot(data3)
 
-            plt.legend(['Speed with picture', 'Speed with picture cleaned', 'Speed with coordinated', 'Average speed'], loc='upper left')
+            x = list(range(max(len(data1_1), len(data1_2), len(data2), len(data3))))
+
+            plt.plot(x, data1_1, marker='.', label='Speed with picture')
+            plt.plot(x, data1_2, marker='.', label='Speed with picture cleaned')
+            plt.plot(x, data2, marker='.', label='Speed with coordinated')
+            plt.plot(x, data3, marker='.', label='Average speed')
+
+            plt.legend(loc='upper left')
             plt.savefig(self.output / 'graphic_SpeedPicture.png')
 
             logger.info(f"The speed graph is complete") 
@@ -329,9 +332,11 @@ class statistic:
     def graphicTime(self, data1):
         try:
             plt.clf()
-            plt.plot(data1)
 
-            plt.legend(['Time per iteration'], loc='upper left')
+            x = list(range(len(data1)))
+            plt.plot(x, data1, marker='.', label='Time per iteration')
+
+            plt.legend(loc='upper left')
             plt.savefig(self.output / 'graphic_Time.png')
 
             logger.info(f"The time graph is complete") 
@@ -339,7 +344,7 @@ class statistic:
         except Exception as error:
             logger.exception(f"An error occurs when creating the time graph: {error}")
 
-    def outlier(self, data):
+    def outlier(self, data, dataCleaned = []):
         try:
             Q1 = np.percentile(data, 25)
             Q3 = np.percentile(data, 75)
@@ -350,13 +355,15 @@ class statistic:
             upperLimit = Q3 + 1.5 * IQR
 
             outliersIndices = np.where((data < lowLimit) | (data > upperLimit))
-            print(lowLimit, upperLimit)
 
-            # dataCleaned = [value for value in data]
-            # for index in outliersIndices[0]:
-            #     dataCleaned[index] = None
+            dataCopy = [value for value in data]
+            for index in outliersIndices[0]:
+                dataCopy[index] = None
 
-            # print(dataCleaned)
+            print(dataCleaned)
+            print(dataCopy[-1])
+            dataCleaned.append(dataCopy[-1])
+            print(dataCleaned)
 
             return dataCleaned
                 
@@ -384,7 +391,7 @@ if __name__ == "__main__":
         statistic = statistic(paths / "Statistic")
         
         # Listes pour stocker les informations
-        speedPicture, speedCoordinated, speedAverage = [], [], []
+        speedPicture, speedPictureCleaned, speedCoordinated, speedAverage = [], [], [], []
         coordinated = []
         loopTime = []
         pictureNumber = 0
@@ -403,9 +410,11 @@ if __name__ == "__main__":
                 speedPicture.append(speed.speedPicture(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
                 speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
-            # speedPictureCleaned = statistic.outlier(speedPicture)
-            # speedAverage.append(speedPictureCleaned[i])
-            speedAverage.append((speedPicture[-1] + speedCoordinated[-1]) / 2)
+            speedPictureCleaned = statistic.outlier(speedPicture, speedPictureCleaned)
+            if speedPictureCleaned[-1] == None:
+                speedAverage.append(speedCoordinated[-1])
+            else:
+                speedAverage.append((speedPictureCleaned[-1] + speedCoordinated[-1]) / 2)
 
             # Temps d'iteration
             endLoopTime = datetime.now()
@@ -413,7 +422,7 @@ if __name__ == "__main__":
 
             # Sauvegarde des valeurs
             dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
-            dataStorage.speedDataFrame(speedPicture[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'data.csv')
+            dataStorage.speedDataFrame(speedPicture[-1], speedPictureCleaned[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'dataSpeed.csv')
 
             # Temps actuel
             nowTime = datetime.now()
@@ -423,7 +432,7 @@ if __name__ == "__main__":
         dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
 
         # Creation de la carte des points et du graphique de vitesse
-        statistic.graphicSpeedPicture(speedPicture, speedPicture, speedCoordinated, speedAverage)
+        statistic.graphicSpeedPicture(speedPicture, speedPictureCleaned, speedCoordinated, speedAverage)
         statistic.graphicTime(loopTime)
         if mapFile == True:
             statistic.drawPointMap(coordinated)

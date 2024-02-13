@@ -6,14 +6,12 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "README.md": true,
         "main.html": true,
         ".gitignore": true,
         "env": true,
         ".vscode": true
     },
     "hide-files.files": [
-        "README.md",
         "main.html",
         ".gitignore",
         "env",
