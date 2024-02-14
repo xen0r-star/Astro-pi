@@ -9,12 +9,14 @@
         ".gitignore": true,
         "env": true,
         ".vscode": true,
-        "main.html": true
+        ".github/workflows": true,
+        ".github": true
     },
     "hide-files.files": [
         ".gitignore",
         "env",
         ".vscode",
-        "main.html"
+        ".github/workflows",
+        ".github"
     ]
 }
