@@ -5,14 +5,7 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        ".gitignore": true,
-        "env": true,
-        ".vscode": true
+        "**/Thumbs.db": true
     },
-    "hide-files.files": [
-        ".gitignore",
-        "env",
-        ".vscode"
-    ]
+    "hide-files.files": []
 }

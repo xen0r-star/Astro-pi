@@ -1,16 +1,24 @@
+# Equipe: Astro Elite
+# Professeur : Laila Bouteglifine
+# Etudiants : Florian Berte, Thibaut Dudart, Rafaël Ravry
+# Ecole : Institut Saint-François de Sales
+# Ville : Ath
+# Pays : Belgique
+
+import cv2
 from datetime import datetime, timedelta
 from exif import Image as exifImage
-from PIL import Image, ImageDraw
-import matplotlib.pyplot as plt
-from picamera import PiCamera
 from logzero import logger
-from pathlib import Path
-from orbit import ISS
-import pandas as pd
-import numpy as np
 import logzero
 import math
-import cv2
+import matplotlib.pyplot as plt
+import numpy as np
+from orbit import ISS
+import pandas as pd
+from pathlib import Path
+from picamera import PiCamera
+from PIL import Image, ImageDraw
+from sense_hat import SenseHat
 
 
 paths = Path(__file__).parent.resolve()
@@ -24,12 +32,16 @@ class checking:
     def folder(self):
         pictureFolder = Path(paths / "Picture")
         statisticFolder = Path(paths / "Statistic")
+        dataFolder = Path(paths / "Data")
 
         if not pictureFolder.is_dir():
             pictureFolder.mkdir(parents=True, exist_ok=True)
         
         if not statisticFolder.is_dir():
             statisticFolder.mkdir(parents=True, exist_ok=True)
+
+        if not dataFolder.is_dir():
+            dataFolder.mkdir(parents=True, exist_ok=True)
         
         logger.info(f"Folder check is complete") 
     
@@ -233,7 +245,7 @@ class pictureCamera:
         except Exception as error:
             logger.exception(f"An error occurred when taking the picture: {error}")
             return None
-        
+
 
 
 class dataStorage:
@@ -275,8 +287,80 @@ class dataStorage:
         except Exception as error:
             logger.exception(f"An error occurs when saving speed data in the csv: {error}")
             return False
+        
+    def coordinatedDataFrame(self, coordinated, file):
+        try:
+            if Path(file).is_file():
+                df = pd.read_csv(file)
+            else:
+                df = pd.DataFrame(columns=["Latitude", "longitude"])
 
+            Data = [
+                [coordinated[0][0], coordinated[0][1]],
+                [coordinated[1][0], coordinated[1][1]]
+            ]
 
+            newData = pd.DataFrame(Data, columns=["Latitude", "longitude"])
+            df = pd.concat([df, newData], ignore_index=True)
+
+            df.to_csv(file, index=False)
+
+            logger.info("Coordinated data saved in the csv")
+            return True
+        
+        except Exception as error:
+            logger.exception(f"An error occurs when saving coordinated data in the csv: {error}")
+            return False
+        
+    def environmentDataFrame(self, humidity, temperature, pressure, file):
+        try:
+            if Path(file).is_file():
+                df = pd.read_csv(file)
+            else:
+                df = pd.DataFrame(columns=["Humidity", "Temperature", "Pressure"])
+
+            Data = [
+                [humidity, temperature, pressure]
+            ]
+
+            newData = pd.DataFrame(Data, columns=["Humidity", "Temperature", "Pressure"])
+            df = pd.concat([df, newData], ignore_index=True)
+
+            df.to_csv(file, index=False)
+
+            logger.info("Environment data saved in the csv")
+            return True
+        
+        except Exception as error:
+            logger.exception(f"An error occurs when saving Environment data in the csv: {error}")
+            return False
+        
+    def IMUDataFrame(self, gyroscope, accelerometer, magnetometer, file):
+        try:
+            if Path(file).is_file():
+                df = pd.read_csv(file)
+            else:
+                df = pd.DataFrame(columns=["Gyroscope X", "Gyroscope Y", "Gyroscope Z", "Accelerometer X", "Accelerometer Y", "Accelerometer Z", "Magnetometer X", "Magnetometer Y", "Magnetometer Z"])
+
+            Data = [
+                [
+                    gyroscope["x"], gyroscope["y"], gyroscope["z"],
+                    accelerometer["x"], accelerometer["y"], accelerometer["z"],
+                    magnetometer["x"], magnetometer["y"], magnetometer["z"]
+                ]
+            ]
+
+            newData = pd.DataFrame(Data, columns=["Gyroscope X", "Gyroscope Y", "Gyroscope Z", "Accelerometer Roll", "Accelerometer Pitch", "Accelerometer Yaw", "Magnetometer X", "Magnetometer Y", "Magnetometer Z"])
+            df = pd.concat([df, newData], ignore_index=True)
+
+            df.to_csv(file, index=False)
+
+            logger.info("IMU data saved in the csv")
+            return True
+        
+        except Exception as error:
+            logger.exception(f"An error occurs when saving IMU data in the csv: {error}")
+            return False
 
 
 class statistic:
@@ -310,16 +394,16 @@ class statistic:
         except Exception as error:
             logger.exception(f"An error occurs when drawing the tracking: {error}")
 
-    def graphicSpeedPicture(self, data1_1, data1_2, data2, data3):
+    def graphicSpeedPicture(self, speedPicture, speedPictureCleaned, speedCoordinated, speedAverage):
         try:
             plt.clf()
 
-            x = list(range(max(len(data1_1), len(data1_2), len(data2), len(data3))))
+            x = list(range(max(len(speedPicture), len(speedPictureCleaned), len(speedCoordinated), len(speedAverage))))
 
-            plt.plot(x, data1_1, marker='.', label='Speed with picture')
-            plt.plot(x, data1_2, marker='.', label='Speed with picture cleaned')
-            plt.plot(x, data2, marker='.', label='Speed with coordinated')
-            plt.plot(x, data3, marker='.', label='Average speed')
+            plt.plot(x, speedPicture, marker='.', label='Speed with picture')
+            plt.plot(x, speedPictureCleaned, marker='.', label='Speed with picture cleaned')
+            plt.plot(x, speedCoordinated, marker='.', label='Speed with coordinated')
+            plt.plot(x, speedAverage, marker='.', label='Average speed')
 
             plt.legend(loc='upper left')
             plt.savefig(self.output / 'graphic_SpeedPicture.png')
@@ -329,12 +413,12 @@ class statistic:
         except Exception as error:
             logger.exception(f"An error occurs when creating the speed graph: {error}")
 
-    def graphicTime(self, data1):
+    def graphicTime(self, time):
         try:
             plt.clf()
 
-            x = list(range(len(data1)))
-            plt.plot(x, data1, marker='.', label='Time per iteration')
+            x = list(range(len(time)))
+            plt.plot(x, time, marker='.', label='Time per iteration')
 
             plt.legend(loc='upper left')
             plt.savefig(self.output / 'graphic_Time.png')
@@ -342,7 +426,52 @@ class statistic:
             logger.info(f"The time graph is complete") 
 
         except Exception as error:
-            logger.exception(f"An error occurs when creating the time graph: {error}")
+            logger.exception(f"An error occurs when creating the time graph: {error}")    
+    
+    def graphicHumidity(self, humidity):
+        try:
+            plt.clf()
+
+            x = list(range(len(humidity)))
+            plt.plot(x, humidity, marker='.', label='Humidity')
+
+            plt.legend(loc='upper left')
+            plt.savefig(self.output / 'graphic_Humidity.png')
+
+            logger.info(f"The humidity graph is complete") 
+
+        except Exception as error:
+            logger.exception(f"An error occurs when creating the humidity graph: {error}")
+
+    def graphicTemperature(self, temperature):
+        try:
+            plt.clf()
+
+            x = list(range(len(temperature)))
+            plt.plot(x, temperature, marker='.', label='Temperature')
+
+            plt.legend(loc='upper left')
+            plt.savefig(self.output / 'graphic_Temperature.png')
+
+            logger.info(f"The temperature graph is complete") 
+
+        except Exception as error:
+            logger.exception(f"An error occurs when creating the temperature graph: {error}")
+
+    def graphicPressure(self, pressure):
+        try:
+            plt.clf()
+
+            x = list(range(len(pressure)))
+            plt.plot(x, pressure, marker='.', label='Pressure')
+
+            plt.legend(loc='upper left')
+            plt.savefig(self.output / 'graphic_Pressure.png')
+
+            logger.info(f"The pressure graph is complete") 
+
+        except Exception as error:
+            logger.exception(f"An error occurs when creating the pressure graph: {error}")
 
     def outlier(self, data, dataCleaned = []):
         try:
@@ -360,15 +489,88 @@ class statistic:
             for index in outliersIndices[0]:
                 dataCopy[index] = None
 
-            print(dataCleaned)
-            print(dataCopy[-1])
             dataCleaned.append(dataCopy[-1])
-            print(dataCleaned)
 
             return dataCleaned
                 
         except Exception as error:
             logger.exception(f"An error occurs with outliers: {error}")
+
+
+
+class SenseHatSensor:
+    """
+    Utilise les capteurs de Sense HAT
+    """
+    def __init__(self):
+        self.sense = SenseHat()
+
+    def gyroscope(self):
+        try:
+            gyroData = self.sense.get_gyroscope_raw()
+            return {
+                "x": gyroData["x"],
+                "y": gyroData["y"],
+                "z": gyroData["z"]
+            }
+        
+        except Exception as error:
+            print(f"An error occurs with gyroscope: {error}")
+            return None
+
+    def accelerometer(self):
+        try:
+            accelData = self.sense.get_accelerometer_raw()
+            return {
+                "x": accelData["x"],
+                "y": accelData["y"],
+                "z": accelData["z"]
+            }
+    
+        except Exception as error:
+            print(f"An error occurs with accelerometer: {error}")
+            return None
+
+    def magnetometer(self):
+        try:
+            magData = self.sense.get_compass_raw()
+            return {
+                "x": magData["x"],
+                "y": magData["y"],
+                "z": magData["z"]
+            }
+    
+        except Exception as error:
+            print(f"An error occurs with magnetometer: {error}")
+            return None
+    
+    def humidity(self):
+        try:
+            humidity = self.sense.get_humidity()
+            return humidity
+    
+        except Exception as error:
+            print(f"An error occurs with humidity sensor: {error}")
+            return None
+    
+    def temperature(self):
+        try:
+            temp = self.sense.get_temperature()
+            return temp
+    
+        except Exception as error:
+            print(f"An error occurs with temperature sensor: {error}")
+            return None
+    
+    def pressure(self):
+        try:
+            pressure = self.sense.get_pressure()
+            return pressure
+    
+        except Exception as error:
+            print(f"An error occurs with pressure sensor: {error}")
+            return None
+
 
 
 
@@ -389,9 +591,12 @@ if __name__ == "__main__":
         speed = speed()
         dataStorage = dataStorage()
         statistic = statistic(paths / "Statistic")
+        SenseHatSensor = SenseHatSensor()
         
         # Listes pour stocker les informations
         speedPicture, speedPictureCleaned, speedCoordinated, speedAverage = [], [], [], []
+        humidity, temperature, pressure = [], [], [] 
+        gyroscope, accelerometer, magnetometer = [], [], []
         coordinated = []
         loopTime = []
         pictureNumber = 0
@@ -413,10 +618,16 @@ if __name__ == "__main__":
                 speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
             speedPictureCleaned = statistic.outlier(speedPicture, speedPictureCleaned)
-            if speedPictureCleaned[-1] == None:
-                speedAverage.append(speedCoordinated[-1])
-            else:
-                speedAverage.append((speedPictureCleaned[-1] + speedCoordinated[-1]) / 2)
+            speedAverage.append(speedCoordinated[-1] if speedPictureCleaned[-1] is None else (speedPictureCleaned[-1] + speedCoordinated[-1]) / 2)
+
+            # Sense Hat capteur
+            gyroscope.append(SenseHatSensor.gyroscope())
+            accelerometer.append(SenseHatSensor.accelerometer())
+            magnetometer.append(SenseHatSensor.magnetometer())
+
+            humidity.append(SenseHatSensor.humidity()) 
+            temperature.append(SenseHatSensor.temperature()) 
+            pressure.append(SenseHatSensor.pressure())
 
             # Temps d'iteration
             endLoopTime = datetime.now()
@@ -424,24 +635,30 @@ if __name__ == "__main__":
 
             # Sauvegarde des valeurs
             dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
-            dataStorage.speedDataFrame(speedPicture[-1], speedPictureCleaned[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'dataSpeed.csv')
+            dataStorage.speedDataFrame(speedPicture[-1], speedPictureCleaned[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'Data' / 'dataSpeed.csv')
+            dataStorage.coordinatedDataFrame(coordinated[-1], paths / 'Data' / 'dataCoordinated.csv')
+            dataStorage.environmentDataFrame(humidity[-1], temperature[-1], pressure[-1], paths / 'Data' / 'dataEnvironment.csv')
+            dataStorage.IMUDataFrame(gyroscope[-1], accelerometer[-1], magnetometer[-1], paths / 'Data' / 'dataIMU.csv')
 
             # Temps actuel
             nowTime = datetime.now()
         
+        logger.info(f"End of loop")
 
         # Enregistrement des donnees de vitesse moyenne
         dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
 
-        # Creation de la carte des points et du graphique de vitesse
-        statistic.graphicSpeedPicture(speedPicture, speedPictureCleaned, speedCoordinated, speedAverage)
-        statistic.graphicTime(loopTime)
+        # Creation de la carte des points et des graphiques
         if mapFile == True:
             statistic.drawPointMap(coordinated)
+        statistic.graphicSpeedPicture(speedPicture, speedPictureCleaned, speedCoordinated, speedAverage)
+        statistic.graphicTime(loopTime)
+        statistic.graphicHumidity(humidity)
+        statistic.graphicTemperature(temperature)
+        statistic.graphicPressure(pressure)
 
         endTime = datetime.now()
         logger.info(f"Running time {endTime - startTime}")
 
     except Exception as error:
         logger.exception(f"An error occurs when the main function: {error}")
-

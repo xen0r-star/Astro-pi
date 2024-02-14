@@ -1,5 +1,5 @@
 # Projet de Calcul de la Vitesse de l'ISS
-- Nom de l'équipe : FloThiRaf
+- Nom de l'équipe : Astro Elite
 - Professeur : Laila Bouteglifine
 - Étudiants : [Florian Berte](https://github.com/xen0r-star), [Thibaut Dudart](https://github.com/thibautddrt), [Rafaël Ravry](https://github.com/xansterrr)
 - École : [Institut Saint-François de Sales](https://maps.app.goo.gl/fj6R5pSYGHteDu2t7)
@@ -35,23 +35,45 @@ Le projet devrait fournir une méthode permettant de calculer la vitesse de l'IS
 ## Explications du Code
 Ce code est conçu pour capturer des images avec une caméra et calculer la vitesse à partir de ces images et des coordonnées GPS. Il gère également le stockage des données et la génération de statistiques et de graphiques.
 
+### Bibliothéque utiliser
+- cv2
+- datetime
+- exif
+- logzero
+- math
+- matplotlib.pyplot
+- numpy
+- orbit
+- pandas
+- pathlib
+- picamera
+- PIL
+- sense_hat
+
 ### Classe checking
 - **Fonction folder**<br>
-Vérifie l'existence des dossiers nécessaires ("Picture" et "Statistic") et les crée s'ils n'existent pas.
+Vérifie l'existence des dossiers nécessaires ("Picture", "Statistic" et "Data") et les crée s'ils n'existent pas.
+
     ```py
     def folder(self):
         pictureFolder = Path(paths / "Picture")
         statisticFolder = Path(paths / "Statistic")
+        dataFolder = Path(paths / "Data")
 
         if not pictureFolder.is_dir():
             pictureFolder.mkdir(parents=True, exist_ok=True)
         
         if not statisticFolder.is_dir():
             statisticFolder.mkdir(parents=True, exist_ok=True)
+        
+        if not dataFolder.is_dir():
+            dataFolder.mkdir(parents=True, exist_ok=True)
     ```
+
 
 - **Fonction file**<br>
 Vérifie l'existence des fichiers nécessaires ("logFile.log" et "result.txt") et les crée s'ils n'existent pas.
+
     ```py
     def file(self):
         logFile = Path(paths / "logFile.log")
@@ -64,8 +86,10 @@ Vérifie l'existence des fichiers nécessaires ("logFile.log" et "result.txt") e
             resultFile.touch()
     ```
 
+
 - **Fonction mapFile**<br>
 Vérifie si le fichier de carte ("map.png") existe dans le dossier "Resources" et retourne un booléen en conséquence.
+
     ```py
     def mapFile(self):
         mapFile = Path(paths / "Resources" / "map.png")
@@ -78,9 +102,11 @@ Vérifie si le fichier de carte ("map.png") existe dans le dossier "Resources" e
         return mapFile
     ```
 
+
 ### Classe speed
 - **Fonction speedPicture**<br>
 Calcule la vitesse à partir de deux images en utilisant les caractéristiques ORB pour détecter les points d'intérêt et les correspondances entre les images.
+
     ```py
     def speedPicture(self, image1, image2, feature=1000, GSD=12648):
         def getData(image):
@@ -138,8 +164,10 @@ Calcule la vitesse à partir de deux images en utilisant les caractéristiques O
 
     ```
 
+
 - **Fonction speedCoordinated**<br>
 Calcule la vitesse à partir de deux images en utilisant les coordonnées GPS stockées dans les données Exif.
+
     ```py
     def speedCoordinated(self, image1, image2):
         def getData(image):
@@ -175,9 +203,11 @@ Calcule la vitesse à partir de deux images en utilisant les coordonnées GPS st
         return speed
     ```
 
+
 ### Classe pictureCamera
 - **Fonction take**<br>
 Capture un certain nombre d'images avec la caméra, enregistre les coordonnées GPS dans les données Exif et stocke les images dans le dossier "Picture".
+
     ```py
     def take(self, number):
         def convertDms(angle):
@@ -216,9 +246,11 @@ Capture un certain nombre d'images avec la caméra, enregistre les coordonnées 
         return self.pictureNumber, coordinated
     ```
 
+
 ### Classe dataStorage
 - **Fonction dataFile**<br>
 Stocke les données dans un fichier texte.
+
     ```py
     def dataFile(self, data, file):
         with open(file, 'w') as file:
@@ -228,8 +260,10 @@ Stocke les données dans un fichier texte.
             return True
     ```
 
+
 - **Fonction speedDataFrame**<br>
 Stocke les données de vitesse dans un fichier CSV.
+
     ```py
     def speedDataFrame(self, speedPicture, speedPictureCleaned, speedCoordinated, speedAverage, loopTime, file):
         if Path(file).is_file():
@@ -249,9 +283,85 @@ Stocke les données de vitesse dans un fichier CSV.
         return True
     ```
 
+
+- **Fonction coordinatedDataFrame**<br>
+Stocke les données de coordonné dans un fichier CSV.
+
+    ```py
+    def coordinatedDataFrame(self, coordinated, file):
+        if Path(file).is_file():
+            df = pd.read_csv(file)
+        else:
+            df = pd.DataFrame(columns=["Latitude", "longitude"])
+
+        Data = [
+            [coordinated[0][0], coordinated[0][1]],
+            [coordinated[1][0], coordinated[1][1]]
+        ]
+
+        newData = pd.DataFrame(Data, columns=["Latitude", "longitude"])
+        df = pd.concat([df, newData], ignore_index=True)
+
+        df.to_csv(file, index=False)
+
+        return True
+    ```
+
+
+- **Fonction environmentDataFrame**<br>
+Stocke les données d'environment dans un fichier CSV.
+
+    ```py
+    def environmentDataFrame(self, humidity, temperature, pressure, file):
+        if Path(file).is_file():
+            df = pd.read_csv(file)
+        else:
+            df = pd.DataFrame(columns=["Humidity", "Temperature", "Pressure"])
+
+        Data = [
+            [humidity, temperature, pressure]
+        ]
+
+        newData = pd.DataFrame(Data, columns=["Humidity", "Temperature", "Pressure"])
+        df = pd.concat([df, newData], ignore_index=True)
+
+        df.to_csv(file, index=False)
+        
+        return True
+    ```
+
+
+- **Fonction IMUDataFrame**<br>
+Stocke les données IMU dans un fichier CSV.
+
+    ```py
+    def IMUDataFrame(self, gyroscope, accelerometer, magnetometer, file):
+        if Path(file).is_file():
+            df = pd.read_csv(file)
+        else:
+            df = pd.DataFrame(columns=["Gyroscope X", "Gyroscope Y", "Gyroscope Z", "Accelerometer X", "Accelerometer Y", "Accelerometer Z", "Magnetometer X", "Magnetometer Y", "Magnetometer Z"])
+
+        Data = [
+            [
+                gyroscope["x"], gyroscope["y"], gyroscope["z"],
+                accelerometer["x"], accelerometer["y"], accelerometer["z"],
+                magnetometer["x"], magnetometer["y"], magnetometer["z"]
+            ]
+        ]
+
+        newData = pd.DataFrame(Data, columns=["Gyroscope X", "Gyroscope Y", "Gyroscope Z", "Accelerometer Roll", "Accelerometer Pitch", "Accelerometer Yaw", "Magnetometer X", "Magnetometer Y", "Magnetometer Z"])
+        df = pd.concat([df, newData], ignore_index=True)
+
+        df.to_csv(file, index=False)
+
+        return True
+    ```
+
+
 ### Classe statistic
 - **Fonction drawPointMap**<br>
 Dessine les points de suivi des stations sur une carte à partir des coordonnées GPS.
+
     ```py
     def drawPointMap(self, coordinated):
         input = paths / "Resources" / "map.png"
@@ -273,38 +383,89 @@ Dessine les points de suivi des stations sur une carte à partir des coordonnée
         worldMap.save(output)
     ```
 
+
 - **Fonction graphicSpeedPicture**<br>
 Génère un graphique de la vitesse à partir des différentes méthodes de calcul.
+
     ```py
-    def graphicSpeedPicture(self, data1_1, data1_2, data2, data3):
+    def graphicSpeedPicture(self, speedPicture, speedPictureCleaned, speedCoordinated, speedAverage):
         plt.clf()
 
-        x = list(range(max(len(data1_1), len(data1_2), len(data2), len(data3))))
+        x = list(range(max(len(speedPicture), len(speedPictureCleaned), len(speedCoordinated), len(speedAverage))))
 
-        plt.plot(x, data1_1, marker='.', label='Speed with picture')
-        plt.plot(x, data1_2, marker='.', label='Speed with picture cleaned')
-        plt.plot(x, data2, marker='.', label='Speed with coordinated')
-        plt.plot(x, data3, marker='.', label='Average speed')
+        plt.plot(x, speedPicture, marker='.', label='Speed with picture')
+        plt.plot(x, speedPictureCleaned, marker='.', label='Speed with picture cleaned')
+        plt.plot(x, speedCoordinated, marker='.', label='Speed with coordinated')
+        plt.plot(x, speedAverage, marker='.', label='Average speed')
 
         plt.legend(loc='upper left')
         plt.savefig(self.output / 'graphic_SpeedPicture.png')
     ```
 
+
 - **Fonction graphicTime**<br>
 Génère un graphique du temps d'itération.
+
     ```py
-    def graphicTime(self, data1):
+    def graphicTime(self, time):
         plt.clf()
 
-        x = list(range(len(data1)))
-        plt.plot(x, data1, marker='.', label='Time per iteration')
+        x = list(range(len(time)))
+        plt.plot(x, time, marker='.', label='Time per iteration')
 
         plt.legend(loc='upper left')
         plt.savefig(self.output / 'graphic_Time.png')
     ```
 
+
+- **Fonction graphicHumidity**<br>
+Génère un graphique des valeur d'humidité.
+
+    ```py
+    def graphicHumidity(self, humidity):
+        plt.clf()
+
+        x = list(range(len(humidity)))
+        plt.plot(x, humidity, marker='.', label='Humidity')
+
+        plt.legend(loc='upper left')
+        plt.savefig(self.output / 'graphic_Humidity.png')
+    ```
+
+
+- **Fonction graphicTemperature**<br>
+Génère un graphique des valeur de température.
+
+    ```py
+    def graphicTemperature(self, temperature):
+        plt.clf()
+
+        x = list(range(len(temperature)))
+        plt.plot(x, temperature, marker='.', label='Temperature')
+
+        plt.legend(loc='upper left')
+        plt.savefig(self.output / 'graphic_Temperature.png')
+    ```
+
+
+- **Fonction graphicPressure**<br>
+Génère un graphique des valeur de pression.
+
+    ```py
+    def graphicPressure(self, pressure):
+        plt.clf()
+
+        x = list(range(len(pressure)))
+        plt.plot(x, pressure, marker='.', label='Pressure')
+
+        plt.legend(loc='upper left')
+        plt.savefig(self.output / 'graphic_Pressure.png')
+    ```
+
+
 - **Fonction outlier**<br>
 Identifie et gère les valeurs aberrantes dans les données de vitesse.
+
     ```py
     def outlier(self, data, dataCleaned = []):
         Q1 = np.percentile(data, 25)
@@ -321,17 +482,89 @@ Identifie et gère les valeurs aberrantes dans les données de vitesse.
         for index in outliersIndices[0]:
             dataCopy[index] = None
 
-        print(dataCleaned)
-        print(dataCopy[-1])
         dataCleaned.append(dataCopy[-1])
-        print(dataCleaned)
 
         return dataCleaned
     ```
 
+
+### Classe SenseHatSensor
+- **Fonction gyroscope**<br>
+Fournit les données du gyroscope, comprenant les valeurs des axes x, y et z.
+
+    ```py
+    def gyroscope(self):
+        gyroData = self.sense.get_gyroscope_raw()
+        return {
+            "x": gyroData["x"],
+            "y": gyroData["y"],
+            "z": gyroData["z"]
+        }
+    ```
+
+
+- **Fonction accelerometer**<br>
+Fournit les données du accéléromètre, comprenant les valeurs des axes x, y et z.
+
+    ```py
+    def accelerometer(self):
+        accelData = self.sense.get_accelerometer_raw()
+        return {
+            "x": accelData["x"],
+            "y": accelData["y"],
+            "z": accelData["z"]
+        }
+    ```
+
+
+- **Fonction magnetometer**<br>
+Fournit les données du magnétomètre, comprenant les valeurs des axes x, y et z.
+
+    ```py
+    def magnetometer(self):
+        magData = self.sense.get_compass_raw()
+        return {
+            "x": magData["x"],
+            "y": magData["y"],
+            "z": magData["z"]
+        }
+    ```
+
+
+- **Fonction humidity**<br>
+Fournit les données d'humidité.
+
+    ```py
+    def humidity(self):
+        humidity = self.sense.get_humidity()
+        return humidity
+    ```
+
+
+- **Fonction temperature**<br>
+Fournit les données de température.
+
+    ```py
+    def temperature(self):
+        temp = self.sense.get_temperature()
+        return temp
+    ```
+
+
+- **Fonction pressure**<br>
+Fournit les données de pression.
+
+    ```py
+    def pressure(self):
+        pressure = self.sense.get_pressure()
+        return pressure
+    ```
+
+
 ### Partie Principale
 1. **Initialisation**<br>
 Le chronomètre est lancé pour mesurer le temps d'exécution total. Ensuite, la vérification des dossiers et des fichiers nécessaires est effectuée à l'aide de la classe checking.
+
     ```py
     # Debut du chronometre
     startTime = datetime.now()
@@ -348,9 +581,12 @@ Le chronomètre est lancé pour mesurer le temps d'exécution total. Ensuite, la
     speed = speed()
     dataStorage = dataStorage()
     statistic = statistic(paths / "Statistic")
+    SenseHatSensor = SenseHatSensor()
 
     # Listes pour stocker les informations
     speedPicture, speedPictureCleaned, speedCoordinated, speedAverage = [], [], [], []
+    humidity, temperature, pressure = [], [], [] 
+    gyroscope, accelerometer, magnetometer = [], [], []
     coordinated = []
     loopTime = []
     pictureNumber = 0
@@ -359,8 +595,10 @@ Le chronomètre est lancé pour mesurer le temps d'exécution total. Ensuite, la
     nowTime = datetime.now()
     ```
 
+
 2. **Capture d'Images et Calcul de Vitesse**<br>
-Une boucle est utilisée pour capturer les images à intervalles réguliers pendant une période de temps définie ou jusqu'à un nombre d'images spécifié. La classe pictureCamera est utilisée pour prendre les images et enregistrer les coordonnées GPS dans les données Exif. La vitesse est calculée à partir des images prises à l'aide des méthodes de la classe speed. Les données de vitesse sont stockées à l'aide de la classe dataStorage.
+Une boucle est utilisée pour capturer les images à intervalles réguliers pendant une période de temps définie ou jusqu'à un nombre d'images spécifié. La classe pictureCamera est utilisée pour prendre les images et enregistrer les coordonnées GPS dans les données Exif. La vitesse est calculée à partir des images prises à l'aide des méthodes de la classe speed. Les données de vitesse sont stockées à l'aide de la classe dataStorage et des donnée des capteurs Sense Hat sont pris.
+
     ```py
     while ((nowTime < startTime + timedelta(minutes=9)) and (pictureNumber < 42)):
         startLoopTime = datetime.now()
@@ -373,10 +611,16 @@ Une boucle est utilisée pour capturer les images à intervalles réguliers pend
             speedCoordinated.append(speed.speedCoordinated(paths / 'Picture' / f'picture{pictureNumber - 1:03d}.jpg', paths / 'Picture' / f'picture{pictureNumber:03d}.jpg'))
 
         speedPictureCleaned = statistic.outlier(speedPicture, speedPictureCleaned)
-        if speedPictureCleaned[-1] == None:
-            speedAverage.append(speedCoordinated[-1])
-        else:
-            speedAverage.append((speedPictureCleaned[-1] + speedCoordinated[-1]) / 2)
+        speedAverage.append(speedCoordinated[-1] if speedPictureCleaned[-1] is None else (speedPictureCleaned[-1] + speedCoordinated[-1]) / 2)
+
+        # Sense Hat capteur
+        gyroscope.append(SenseHatSensor.gyroscope())
+        accelerometer.append(SenseHatSensor.accelerometer())
+        magnetometer.append(SenseHatSensor.magnetometer())
+
+        humidity.append(SenseHatSensor.humidity()) 
+        temperature.append(SenseHatSensor.temperature()) 
+        pressure.append(SenseHatSensor.pressure())
 
         # Temps d'iteration
         endLoopTime = datetime.now()
@@ -384,24 +628,33 @@ Une boucle est utilisée pour capturer les images à intervalles réguliers pend
 
         # Sauvegarde des valeurs
         dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
-        dataStorage.speedDataFrame(speedPicture[-1], speedPictureCleaned[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'dataSpeed.csv')
+        dataStorage.speedDataFrame(speedPicture[-1], speedPictureCleaned[-1], speedCoordinated[-1], speedAverage[-1], loopTime[-1], paths / 'Data' / 'dataSpeed.csv')
+        dataStorage.coordinatedDataFrame(coordinated[-1], paths / 'Data' / 'dataCoordinated.csv')
+        dataStorage.environmentDataFrame(humidity[-1], temperature[-1], pressure[-1], paths / 'Data' / 'dataEnvironment.csv')
+        dataStorage.IMUDataFrame(gyroscope[-1], accelerometer[-1], magnetometer[-1], paths / 'Data' / 'dataIMU.csv')
 
         # Temps actuel
         nowTime = datetime.now()
     ```
 
+
 3. **Génération de Statistiques et de Graphiques**<br>
-Une fois toutes les images capturées et la vitesse calculée, des statistiques sont générées à partir des données collectées. La classe statistic est utilisée pour créer des graphiques de vitesse et de temps. Si une carte est disponible, les points de suivi des stations sont dessinés sur la carte.
+Une fois toutes les images capturées et la vitesse calculée, des statistiques sont générées à partir des données collectées. La classe statistic est utilisée pour créer des graphiques de vitesse, de temps, d'humidité, de température et de pression. Si une carte est disponible, les points de suivi des stations sont dessinés sur la carte.
+
     ```py
     # Enregistrement des donnees de vitesse moyenne
     dataStorage.dataFile("{:.4f}".format(np.mean(speedAverage)), paths / 'result.txt')
 
     # Creation de la carte des points et du graphique de vitesse
-    statistic.graphicSpeedPicture(speedPicture, speedPictureCleaned, speedCoordinated, speedAverage)
-    statistic.graphicTime(loopTime)
     if mapFile == True:
         statistic.drawPointMap(coordinated)
+    statistic.graphicSpeedPicture(speedPicture, speedPictureCleaned, speedCoordinated, speedAverage)
+    statistic.graphicTime(loopTime)
+    statistic.graphicHumidity(humidity)
+    statistic.graphicTemperature(temperature)
+    statistic.graphicPressure(pressure)
     ```
+
 
 ### Utilisation
 Pour utiliser ce code, assurez-vous d'avoir installé les dépendances nécessaires et de disposer des autorisations appropriées pour accéder à la caméra et aux fichiers du système. Ensuite, exécutez le script principal (main.py) pour capturer les images, calculer la vitesse et générer les statistiques. Assurez-vous que les dossiers et fichiers nécessaires sont présents avant d'exécuter le code.
