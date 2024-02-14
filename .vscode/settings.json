@@ -8,13 +8,11 @@
         "**/Thumbs.db": true,
         ".gitignore": true,
         "env": true,
-        ".vscode": true,
-        ".github": true
+        ".vscode": true
     },
     "hide-files.files": [
         ".gitignore",
         "env",
-        ".vscode",
-        ".github"
+        ".vscode"
     ]
 }
