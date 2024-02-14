@@ -6,15 +6,15 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
-        "main.html": true,
         ".gitignore": true,
         "env": true,
-        ".vscode": true
+        ".vscode": true,
+        "main.html": true
     },
     "hide-files.files": [
-        "main.html",
         ".gitignore",
         "env",
-        ".vscode"
+        ".vscode",
+        "main.html"
     ]
 }

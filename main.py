@@ -228,12 +228,12 @@ class pictureCamera:
 
                 logger.info(f"Taking the picture {self.pictureNumber:03d}")
 
+            return self.pictureNumber, coordinated
+        
         except Exception as error:
             logger.exception(f"An error occurred when taking the picture: {error}")
             return None
         
-        return self.pictureNumber, coordinated
-
 
 
 class dataStorage:
@@ -395,6 +395,8 @@ if __name__ == "__main__":
         coordinated = []
         loopTime = []
         pictureNumber = 0
+
+        logger.info(f"Start of loop")
 
         # Temps actuel
         nowTime = datetime.now()
