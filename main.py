@@ -5,6 +5,8 @@
 # Ville : Ath
 # Pays : Belgique
 
+# Documentation : https://xen0r-star.github.io/Astro-pi/
+
 import cv2
 from datetime import datetime, timedelta
 from exif import Image as exifImage
