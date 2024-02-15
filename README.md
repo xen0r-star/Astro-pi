@@ -6,6 +6,9 @@
 - Ville : [Ath](https://maps.app.goo.gl/BtFSd77azyfDAs5f6)
 - Pays : Belgique
 
+
+
+
 ## Introduction
 Le projet vise à calculer la vitesse de la Station Spatiale Internationale (ISS) en utilisant une approche basée sur la capture d'images de la Terre à l'aide d'une caméra Raspberry Pi. L'objectif est d'obtenir des images simultanées de la Terre, de les analyser à l'aide de Google Coral pour distinguer les zones avec nuages de celles sans nuages, puis de calculer la vitesse de l'ISS en mesurant la distance entre des éléments repérés sur ces images.
 
@@ -28,9 +31,11 @@ Utilisation des coordonnées récupérées pour calculer la vitesse de l'ISS en 
 6. **Répétition du Processus**<br>
 Répétition du processus plusieurs fois pour obtenir une vitesse moyenne de l'ISS.
 
-
 ## Résultats Attendus
 Le projet devrait fournir une méthode permettant de calculer la vitesse de l'ISS en utilisant des images de la Terre capturées à partir de la station spatiale. Les résultats seront basés sur une analyse précise des images et une mesure correcte de la distance entre des éléments repérés.
+
+
+
 
 ## Explications du Code
 Ce code est conçu pour capturer des images avec une caméra et calculer la vitesse à partir de ces images et des coordonnées GPS. Il gère également le stockage des données et la génération de statistiques et de graphiques.
