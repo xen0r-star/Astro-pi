@@ -1,8 +1,4 @@
 # Astro-Pi / Astro Elite
-<p align="left">
-    <img src="https://tse4.mm.bing.net/th/id/OIG2.EAWVA7IJpdkPP2DqFScf" alt="Logo du projet" class="logo" height=200 width=200 style="border-radius: 20px; margin: 0 10px;">
-</p>
-
 - Nom de l'équipe : Astro Elite
 - Étudiants : [Florian Berte](https://github.com/xen0r-star), [Thibaut Dudart](https://github.com/thibautddrt), [Rafaël Ravry](https://github.com/xansterrr)
 - Professeur : Laila Bouteglifine
@@ -10,6 +6,9 @@
 - Ville : [Ath](https://maps.app.goo.gl/BtFSd77azyfDAs5f6)
 - École : [Institut Saint-François de Sales](https://maps.app.goo.gl/fj6R5pSYGHteDu2t7)
 
+<p align="left">
+    <img src="https://tse4.mm.bing.net/th/id/OIG2.EAWVA7IJpdkPP2DqFScf" alt="Logo du projet" class="logo" height=200 width=200 style="border-radius: 20px; margin: 0 10px;">
+</p>
 
 
 ## 📝 Table des matières
