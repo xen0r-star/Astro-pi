@@ -1,59 +1,73 @@
-# Projet de Calcul de la Vitesse de l'ISS
+# Astro-Pi / Astro Elite
+<p align="left">
+    <img src="https://tse4.mm.bing.net/th/id/OIG2.EAWVA7IJpdkPP2DqFScf" alt="Logo du projet" class="logo" height=200 width=200 style="border-radius: 20px; margin: 0 10px;">
+</p>
+
 - Nom de l'équipe : Astro Elite
-- Professeur : Laila Bouteglifine
 - Étudiants : [Florian Berte](https://github.com/xen0r-star), [Thibaut Dudart](https://github.com/thibautddrt), [Rafaël Ravry](https://github.com/xansterrr)
-- École : [Institut Saint-François de Sales](https://maps.app.goo.gl/fj6R5pSYGHteDu2t7)
-- Ville : [Ath](https://maps.app.goo.gl/BtFSd77azyfDAs5f6)
+- Professeur : Laila Bouteglifine
 - Pays : Belgique
+- Ville : [Ath](https://maps.app.goo.gl/BtFSd77azyfDAs5f6)
+- École : [Institut Saint-François de Sales](https://maps.app.goo.gl/fj6R5pSYGHteDu2t7)
 
 
 
+## 📝 Table des matières
 
-## Introduction
-Le projet vise à calculer la vitesse de la Station Spatiale Internationale (ISS) en utilisant une approche basée sur la capture d'images de la Terre à l'aide d'une caméra Raspberry Pi. L'objectif est d'obtenir des images simultanées de la Terre, de les analyser à l'aide de Google Coral pour distinguer les zones avec nuages de celles sans nuages, puis de calculer la vitesse de l'ISS en mesurant la distance entre des éléments repérés sur ces images.
-
-## Méthodologie
-1. **Acquisition des Images**<br>
-Utilisation d'une caméra Raspberry Pi pour capturer des images de la Terre depuis la Station Spatiale Internationale.
-
-2. **Analyse d'Images**<br>
-Traitement des images à l'aide de Google Coral pour différencier les zones avec nuages de celles sans nuages.
-
-3. **Sélection des Paires d'Images Simultanées**<br>
-Répétition du processus jusqu'à l'obtention de deux images ayant les mêmes caractéristiques (nuageuses ou sans nuages) et prises simultanément.
-
-4. **Calcul de la Distance**<br>
-Mesure de la distance entre deux éléments identifiables sur les images en utilisant des coordonnées x et y.
-
-5. **Calcul de la Vitesse**<br>
-Utilisation des coordonnées récupérées pour calculer la vitesse de l'ISS en analysant le déplacement relatif entre les deux images.
-
-6. **Répétition du Processus**<br>
-Répétition du processus plusieurs fois pour obtenir une vitesse moyenne de l'ISS.
-
-## Résultats Attendus
-Le projet devrait fournir une méthode permettant de calculer la vitesse de l'ISS en utilisant des images de la Terre capturées à partir de la station spatiale. Les résultats seront basés sur une analyse précise des images et une mesure correcte de la distance entre des éléments repérés.
+- [❓ Explication du projet](#Projet)
+- [💻 Explications du Code](#Code)
+- [🚀 Utilisation](#Utilisation)
 
 
+## ❓ Explication du projet <a name = "Projet"></a>
 
+### Introduction
+Ce projet a pour objectif de déterminer la vitesse de la Station Spatiale Internationale (ISS) en exploitant une méthode qui repose sur la capture d'images de la Terre à l'aide d'une caméra Raspberry Pi, combinée aux coordonnées spatiales extraites grâce à la bibliothèque Orbit. Des données et des graphiques sont générés au cours du processus pour analyser les résultats obtenus.
 
-## Explications du Code
+### Méthodologie
+1. **Capturer des Images et calculer la Vitesse**<br>
+Utilisation d'une caméra Raspberry Pi pour capturer des images de la Terre depuis l'ISS et calculer sa vitesse.
+
+2. **Acquisition de Coordonnées et calculer la Vitesse**<br>
+Utilisation de la bibliothèque Orbit pour récupérer les coordonnées de longitude et de latitude de l'ISS et calculer sa vitesse.
+
+3. **Collecte de données Sense HAT**<br>
+Collecte de données du Sense HAT. (Gyroscope, Accéléromètre, Magnétomètre, Humidité, Température et Pression)
+
+4. **Collecte et affinement des données**<br>
+Répétition des mesures pour la collecte et l'affinement des données pendants 10 minutes.
+
+5. **Création de graphiques et enregistrement de la vitesse**<br>
+Création de graphiques et de cartes pour toutes les données collectées, avec enregistrement de la vitesse dans le fichier.
+
+### Résultats Attendus
+- Détermination précise de la vitesse de la Station Spatiale Internationale (ISS) à partir des images capturées et des coordonnées spatiales extraites.
+- Graphiques illustrant la variation de la vitesse de l'ISS au fil du temps.
+- Cartes montrant la trajectoire de l'ISS par rapport à la Terre.
+- Analyse des données collectées à partir du Sense HAT, y compris les mesures de gyroscope, d'accéléromètre, de magnétomètre, d'humidité, de température et de pression.
+- Enregistrement des données collecté dans des fichiers.
+
+<br>
+
+## 💻 Explications du Code <a name = "Code"></a>
 Ce code est conçu pour capturer des images avec une caméra et calculer la vitesse à partir de ces images et des coordonnées GPS. Il gère également le stockage des données et la génération de statistiques et de graphiques.
 
 ### Bibliothéque utiliser
-- cv2
-- datetime
-- exif
-- logzero
-- math
-- matplotlib.pyplot
-- numpy
-- orbit
-- pandas
-- pathlib
-- picamera
-- PIL
-- sense_hat
+- **Bibliothèques Principales**<br>
+    - cv2 (OpenCV)
+    - exif
+    - numpy
+- **Bibliothèques Utilitaires**<br>
+    - datetime
+    - logzero
+    - matplotlib
+    - pandas
+    - pathlib
+    - PIL (Pillow)
+- **Bibliothèques Matérielles**<br>
+    - picamera
+    - sense_hat
+
 
 ### Classe checking
 - **Fonction folder**<br>
@@ -193,6 +207,7 @@ Calcule la vitesse à partir de deux images en utilisant les coordonnées GPS st
 
             return time, lat, lon
         
+        # obtenir les donnees d'image
         time1, lat1, lon1 = getData(image1)
         time2, lat2, lon2 = getData(image2)
 
@@ -469,7 +484,7 @@ Génère un graphique des valeur de pression.
 
 
 - **Fonction outlier**<br>
-Identifie et gère les valeurs aberrantes dans les données de vitesse.
+Identifie et gère les valeurs aberrantes des données.
 
     ```py
     def outlier(self, data, dataCleaned = []):
@@ -568,7 +583,7 @@ Fournit les données de pression.
 
 ### Partie Principale
 1. **Initialisation**<br>
-Le chronomètre est lancé pour mesurer le temps d'exécution total. Ensuite, la vérification des dossiers et des fichiers nécessaires est effectuée à l'aide de la classe checking.
+Le chronomètre est enclenché pour mesurer la durée totale d'exécution. Ensuite, la classe de vérification est utilisée pour vérifier l'existence des dossiers et des fichiers nécessaires, et les classes et variables sont initialisées.
 
     ```py
     # Debut du chronometre
@@ -602,7 +617,7 @@ Le chronomètre est lancé pour mesurer le temps d'exécution total. Ensuite, la
 
 
 2. **Capture d'Images et Calcul de Vitesse**<br>
-Une boucle est utilisée pour capturer les images à intervalles réguliers pendant une période de temps définie ou jusqu'à un nombre d'images spécifié. La classe pictureCamera est utilisée pour prendre les images et enregistrer les coordonnées GPS dans les données Exif. La vitesse est calculée à partir des images prises à l'aide des méthodes de la classe speed. Les données de vitesse sont stockées à l'aide de la classe dataStorage et des donnée des capteurs Sense Hat sont pris.
+La boucle itérative capture des images à intervalles réguliers pendant 9 minutes ou jusqu'à ce qu'un maximum de 42 images soit atteint. La classe pictureCamera prend les images et enregistre les coordonnées GPS dans les données Exif. Des calculs de valeurs aberrantes sont effectués sur les mesures de vitesse à partir d'images en raison de leur variabilité importante. Les données des capteurs Sense Hat sont collectées et à chaque itération, toutes les données sont sauvegardées.
 
     ```py
     while ((nowTime < startTime + timedelta(minutes=9)) and (pictureNumber < 42)):
@@ -660,6 +675,9 @@ Une fois toutes les images capturées et la vitesse calculée, des statistiques 
     statistic.graphicPressure(pressure)
     ```
 
+<br>
 
-### Utilisation
+## 🚀 Utilisation <a name = "Utilisation"></a>
 Pour utiliser ce code, assurez-vous d'avoir installé les dépendances nécessaires et de disposer des autorisations appropriées pour accéder à la caméra et aux fichiers du système. Ensuite, exécutez le script principal (main.py) pour capturer les images, calculer la vitesse et générer les statistiques. Assurez-vous que les dossiers et fichiers nécessaires sont présents avant d'exécuter le code.
+
+Les instructions pour lancer une simulation du programme sont disponibles sur le site [rasperry.org](https://projects.raspberrypi.org/en/projects/mission-space-lab-creator-guide/2).
