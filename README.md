@@ -7,7 +7,7 @@
 - École : [Institut Saint-François de Sales](https://maps.app.goo.gl/fj6R5pSYGHteDu2t7)
 
 <p align="left">
-    <img src="https://tse4.mm.bing.net/th/id/OIG2.EAWVA7IJpdkPP2DqFScf" alt="Logo du projet" class="logo" height=200 width=200 style="border-radius: 20px; margin: 0 10px;">
+    <img src="logo.jpg" alt="Logo du projet" class="logo" height=200 width=200 style="border-radius: 20px; margin: 0 10px;">
 </p>
 
 
