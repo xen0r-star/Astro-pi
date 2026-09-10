@@ -12,13 +12,13 @@ Executed aboard the ISS as part of the **European Space Agency (ESA) Astro Pi Ch
 ## 🛠️ Tech Stack & Key Features
 
 - **Computer Vision & Speed Estimation:**
-    - **Feature Matching (ORB + BruteForce):** Tracks landmarks between consecutive Earth images to derive displacement.
-    - **Exif Metadata & Geolocation:** Extracts GPS telemetry and calculates geodesic distance via the **Haversine formula**.
+  - **Feature Matching (ORB + BruteForce):** Tracks landmarks between consecutive Earth images to derive displacement.
+  - **Exif Metadata & Geolocation:** Extracts GPS telemetry and calculates geodesic distance via the **Haversine formula**.
 - **Sensor Telemetry & IoT:**
-    - Real-time logging of IMU (Gyroscope, Accelerometer, Magnetometer) and environmental metrics (Temperature, Pressure, Humidity) via **Sense HAT**.
+  - Real-time logging of IMU (Gyroscope, Accelerometer, Magnetometer) and environmental metrics (Temperature, Pressure, Humidity) via **Sense HAT**.
 - **Data Engineering & Analytics:**
-    - Outlier removal pipeline using Interquartile Range (IQR).
-    - Automated generation of CSV reports and diagnostic plots (**Pandas**, **Matplotlib**).
+  - Outlier removal pipeline using Interquartile Range (IQR).
+  - Automated generation of CSV reports and diagnostic plots (**Pandas**, **Matplotlib**).
 
 ## 📐 Pipeline Overview
 
