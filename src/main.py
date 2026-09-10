@@ -60,7 +60,7 @@ class checking:
         logger.info(f"File check is complete") 
     
     def mapFile(self):
-        mapFile = Path(paths / "Resources" / "map.png")
+        mapFile = Path(paths / "resources" / "map.png")
 
         if not mapFile.is_file():
             mapFile = False
@@ -374,7 +374,7 @@ class statistic:
 
     def drawPointMap(self, coordinated):
         try:
-            input = paths / "Resources" / "map.png"
+            input = paths / "resources" / "map.png"
             output = self.output / "stationsTracking.png"
 
             worldMap = Image.open(input)
