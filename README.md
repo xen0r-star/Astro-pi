@@ -9,6 +9,10 @@ An edge computing application designed to calculate the orbital speed of the Int
 
 Executed aboard the ISS as part of the **European Space Agency (ESA) Astro Pi Challenge**.
 
+<p align="center">
+  <img src="docs/astro_pi.jpg" alt="Astro Pi Hardware on ISS" width="600"/>
+</p>
+
 ## 🛠️ Tech Stack & Key Features
 
 - **Computer Vision & Speed Estimation:**
@@ -35,12 +39,9 @@ Executed aboard the ISS as part of the **European Space Agency (ESA) Astro Pi Ch
 | **Validation Method** | Exif GPS Coordinates + Haversine Formula         |
 | **Hardware Target**   | Raspberry Pi Flight Unit + Sense HAT + Pi Camera |
 
-_(Include here an image of your generated plots or ISS track map)_
-`![ISS Tracking Map](assets/stationsTracking.png)`
-
 ## 👥 Authors & Context
 
-Project developed by **Team Astro Elite** (Belgium) for the ESA Astro Pi Challenge.
+Project developed by **Team 6TT2024** (Belgium) for the ESA Astro Pi Challenge.
 
 - **School:** Institut Saint-François de Sales (Ath, Belgium)
 - **Team:** Florian Berte, Thibaut Dudart, Rafaël Ravry
